@@ -25,10 +25,12 @@
             <div class="col col-md-1"></div>
             <div class="col col-md-10">
                 <div th:each="recipe : ${recipes}" class="col img-container col-sm-4 text-center">
-                    <img class="recipe-img" th:src="${recipe.imageUrl}"></img>
-                    <div class="middle">
-                        <p class="name" th:text="${recipe.name}"></p>
-                    </div>
+                    <a th:href="@{/recipe?id=} + ${recipe.getId()}">
+                        <img class="recipe-img" th:src="${recipe.imageUrl}"></img>
+                        <div class="middle">
+                            <p class="name" th:text="${recipe.name}"></p>
+                        </div>
+                    </a>
                 </div>
             </div>
             <div class="col col-md-1"></div>

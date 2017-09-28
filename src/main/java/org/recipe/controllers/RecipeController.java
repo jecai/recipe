@@ -22,8 +22,8 @@ public class RecipeController {
     public String index(Model model, int id) {
 
         //get the Recipe with the given ID and pass it into the view
-        model.addAttribute("job", recipeData.findById(id));
-        return "job-detail";
+        model.addAttribute("recipe", recipeData.findById(id));
+        return "recipe-detail";
     }
 
     @RequestMapping(value = "add", method = RequestMethod.GET)

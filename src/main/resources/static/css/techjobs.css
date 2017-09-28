@@ -82,3 +82,17 @@ ul.form-group li {
     padding: 16px 32px;
 }
 /*******************************************/
+
+.recipe-detail-img {
+    width: 200px;
+
+}
+
+.recipe-title {
+    font-size: 30px;
+    font-weight: bold;
+}
+
+table {
+    margin: 0 auto;
+}
