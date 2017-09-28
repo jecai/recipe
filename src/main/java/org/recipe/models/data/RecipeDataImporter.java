@@ -45,7 +45,7 @@ public class RecipeDataImporter {
                 String ingredientStr = record.get("ingredient");
                 String servingStr = record.get("serving");
                 String calorieStr = record.get("calorie");
-                String imageUrlStr = record.get("image url");
+                String imageUrlStr = record.get("imageUrl");
 
                 Ingredient ingredient = recipeData.getIngredients().findByValue(ingredientStr);
                 if (ingredient == null) {
