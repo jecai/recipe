@@ -1,14 +1,10 @@
-package org.launchcode.models.data;
+package org.recipe.models.data;
 
-import org.launchcode.models.Job;
-import org.launchcode.models.JobField;
+import org.recipe.models.RecipeField;
 
 import java.util.ArrayList;
 
-/**
- * Created by LaunchCode
- */
-public class JobFieldData<T extends JobField> {
+public class RecipeFieldData<T extends RecipeField> {
 
     private ArrayList<T> allFields = new ArrayList<>();
 

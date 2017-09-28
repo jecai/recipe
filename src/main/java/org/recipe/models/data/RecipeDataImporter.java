@@ -1,9 +1,9 @@
-package org.launchcode.models.data;
+package org.recipe.models.data;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
-import org.launchcode.models.*;
+import org.recipe.models.*;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 
@@ -11,22 +11,17 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-/**
- * Created by LaunchCode
- */
-public class JobDataImporter {
+public class RecipeDataImporter {
 
-    private static final String DATA_FILE = "job_data.csv";
+    private static final String DATA_FILE = "recipe_data.csv";
     private static boolean isDataLoaded = false;
 
     /**
      * Read in data from a CSV file and store it in a list
      */
-    static void loadData(JobData jobData) {
+    static void loadData(RecipeData recipeData) {
 
         // Only load data once
         if (isDataLoaded) {
@@ -47,38 +42,38 @@ public class JobDataImporter {
             // Put the records into a more friendly format
             for (CSVRecord record : records) {
 
-                String empStr = record.get("employer");
-                String locStr = record.get("location");
-                String coreCompStr = record.get("core competency");
-                String posTypeStr = record.get("position type");
+                String ingredientStr = record.get("ingredient");
+                String servingStr = record.get("serving");
+                String calorieStr = record.get("calorie");
+                String imageUrlStr = record.get("image url");
 
-                Employer emp = jobData.getEmployers().findByValue(empStr);
-                if (emp == null) {
-                    emp = new Employer(empStr);
-                    jobData.getEmployers().add(emp);
+                Ingredient ingredient = recipeData.getIngredients().findByValue(ingredientStr);
+                if (ingredient == null) {
+                    ingredient = new Ingredient(ingredientStr);
+                    recipeData.getIngredients().add(ingredient);
                 }
 
-                Location loc = jobData.getLocations().findByValue(locStr);
-                if (loc == null) {
-                    loc = new Location(locStr);
-                    jobData.getLocations().add(loc);
+                Serving serving = recipeData.getServings().findByValue(servingStr);
+                if (serving == null) {
+                    serving = new Serving(servingStr);
+                    recipeData.getServings().add(serving);
                 }
 
-                PositionType posType = jobData.getPositionTypes().findByValue(posTypeStr);
-                if (posType == null) {
-                    posType = new PositionType(posTypeStr);
-                    jobData.getPositionTypes().add(posType);
+                Calorie calorie = recipeData.getCalores().findByValue(calorieStr);
+                if (calorie == null) {
+                    calorie = new Calorie(calorieStr);
+                    recipeData.getCalores().add(calorie);
                 }
 
-                CoreCompetency coreComp = jobData.getCoreCompetencies().findByValue(coreCompStr);
-                if (coreComp == null) {
-                    coreComp = new CoreCompetency(coreCompStr);
-                    jobData.getCoreCompetencies().add(coreComp);
+                ImageUrl imageUrl = recipeData.getImageUrl().findByValue(imageUrlStr);
+                if (imageUrl == null) {
+                    imageUrl = new ImageUrl(imageUrlStr);
+                    recipeData.getImageUrl().add(imageUrl);
                 }
 
-                Job newJob = new Job(record.get("name"), emp, loc, posType, coreComp);
+                Recipe newRecipe = new Recipe(record.get("name"), ingredient, serving, calorie, imageUrl);
 
-                jobData.add(newJob);
+                recipeData.add(newRecipe);
             }
 
             // flag the data as loaded, so we don't do it twice

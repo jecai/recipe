@@ -19,38 +19,38 @@
         <div class="form-group">
             <label th:for="employerId">Employer</label>
             <select th:field="*{employerId}">
-                <option th:each="employer : *{employers}"
-                        th:value="${employer.id}"
-                        th:text="${employer.value}"></option>
+                <option th:each="ingredient : *{ingredients}"
+                        th:value="${ingredient.id}"
+                        th:text="${ingredient.value}"></option>
             </select>
         </div>
 
-        <!-- TODO #5 - Create <select> dropdowns for other job fields -->
+        <!-- TODO #5 - Create <select> dropdowns for other recipe fields -->
 
         <div class="form-group">
             <label th:for="locationId">Location</label>
             <select th:field="*{locationId}">
-                <option th:each="location : *{locations}"
-                        th:value="${location.id}"
-                        th:text="${location.value}"></option>
+                <option th:each="serving : *{servings}"
+                        th:value="${serving.id}"
+                        th:text="${serving.value}"></option>
             </select>
         </div>
 
         <div class="form-group">
             <label th:for="coreCompetencyId">Skill</label>
             <select th:field="*{coreCompetencyId}">
-                <option th:each="coreCompetency : *{coreCompetencies}"
-                        th:value="${coreCompetency.id}"
-                        th:text="${coreCompetency.value}"></option>
+                <option th:each="imageUrl : *{coreCompetencies}"
+                        th:value="${imageUrl.id}"
+                        th:text="${imageUrl.value}"></option>
             </select>
         </div>
 
         <div class="form-group">
             <label th:for="positionTypeId">Position Type</label>
             <select th:field="*{positionTypeId}">
-                <option th:each="positionType : *{positionTypes}"
-                        th:value="${positionType.id}"
-                        th:text="${positionType.value}"></option>
+                <option th:each="calorie : *{calories}"
+                        th:value="${calorie.id}"
+                        th:text="${calorie.value}"></option>
             </select>
         </div>
 

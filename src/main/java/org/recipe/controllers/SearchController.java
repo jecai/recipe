@@ -1,9 +1,9 @@
-package org.launchcode.controllers;
+package org.recipe.controllers;
 
-import org.launchcode.models.Job;
-import org.launchcode.models.JobFieldType;
-import org.launchcode.models.forms.SearchForm;
-import org.launchcode.models.data.JobData;
+import org.recipe.models.Recipe;
+import org.recipe.models.RecipeFieldType;
+import org.recipe.models.data.RecipeData;
+import org.recipe.models.forms.SearchForm;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,7 +18,7 @@ import java.util.ArrayList;
 @RequestMapping("search")
 public class SearchController {
 
-    private JobData jobData = JobData.getInstance();
+    private RecipeData recipeData = RecipeData.getInstance();
 
     @RequestMapping(value = "")
     public String search(Model model) {
@@ -30,15 +30,15 @@ public class SearchController {
     public String search(Model model,
                          @ModelAttribute SearchForm searchForm) {
 
-        ArrayList<Job> jobs;
+        ArrayList<Recipe> recipes;
 
-        if (searchForm.getSearchField().equals(JobFieldType.ALL)) {
-            jobs = jobData.findByValue(searchForm.getKeyword());
+        if (searchForm.getSearchField().equals(RecipeFieldType.ALL)) {
+            recipes = recipeData.findByValue(searchForm.getKeyword());
         } else {
-            jobs = jobData.findByColumnAndValue(searchForm.getSearchField(), searchForm.getKeyword());
+            recipes = recipeData.findByColumnAndValue(searchForm.getSearchField(), searchForm.getKeyword());
         }
 
-        model.addAttribute("jobs", jobs);
+        model.addAttribute("recipes", recipes);
 
         return "search";
     }

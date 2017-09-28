@@ -1,30 +1,27 @@
-package org.launchcode.models.forms;
+package org.recipe.models.forms;
 
-import org.launchcode.models.JobFieldType;
+import org.recipe.models.RecipeFieldType;
 
-/**
- * Created by LaunchCode
- */
 public class SearchForm {
 
     // The search options
-    private JobFieldType[] fields = JobFieldType.values();
+    private RecipeFieldType[] fields = RecipeFieldType.values();
 
     // The selected search options
-    private JobFieldType searchField = JobFieldType.ALL;
+    private RecipeFieldType searchField = RecipeFieldType.ALL;
 
     // The search string
     private String keyword;
 
-    public JobFieldType getSearchField() {
+    public RecipeFieldType getSearchField() {
         return searchField;
     }
 
-    public void setSearchField(JobFieldType searchField) {
+    public void setSearchField(RecipeFieldType searchField) {
         this.searchField = searchField;
     }
 
-    public JobFieldType[] getFields() {
+    public RecipeFieldType[] getFields() {
         return fields;
     }
 

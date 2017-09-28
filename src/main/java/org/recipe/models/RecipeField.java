@@ -1,20 +1,17 @@
-package org.launchcode.models;
+package org.recipe.models;
 
-/**
- * Created by LaunchCode
- */
-public class JobField {
+public class RecipeField {
 
     private String value;
     private int id;
     private static int nextId = 1;
 
-    public JobField() {
+    public RecipeField() {
         id = nextId;
         nextId++;
     }
 
-    public JobField(String aValue) {
+    public RecipeField(String aValue) {
         this();
         value = aValue;
     }
@@ -48,9 +45,9 @@ public class JobField {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        JobField jobField = (JobField) o;
+        RecipeField recipeField = (RecipeField) o;
 
-        return id == jobField.getId();
+        return id == recipeField.getId();
     }
 
     @Override
