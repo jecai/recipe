@@ -38,10 +38,14 @@ ul.form-group li {
     padding-right: 15px;
 }
 
+.img-container {
+    height: 350px;
+}
+
 .recipe-img {
     padding: 20px 0;
     max-width: 100%;
-    max-height: 350px;
+    height: 100%;
 }
 
 /*.col {*/
