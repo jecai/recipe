@@ -4,17 +4,39 @@
 </head>
 <body>
 
-    <div th:replace="fragments :: page-header"></div>
+<div th:replace="fragments :: page-header"></div>
 
-    <div class="container body-content">
-        <h1>TechJobs</h1>
+<div class="container body-content">
 
-        <p>View recipes by:</p>
-        <ul>
-            <li><a th:href="@{/search}">Search</a></li>
-            <li><a th:href="@{/list}">List</a></li>
-        </ul>
+    <h1>
+        <span th:text="${#strings.capitalizeWords(title)}"></span>
+        <span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span>
+    </h1>
+
+    <div th:unless="${recipes} and ${recipes.size()}">
+        <h2>No Recipes</h2>
     </div>
+
+    <div th:if="${recipes} and ${recipes.size()}">
+
+        <h3 th:text="${recipes.size() + ' Recipe(s)'}"></h3>
+
+        <div class="row">
+            <div class="col col-md-1"></div>
+            <div class="col col-md-10">
+                <div th:each="recipe : ${recipes}" class="col img-container col-sm-4 text-center" style="height:350px">
+                    <img class="recipe-img" th:src="${recipe.imageUrl}"></img>
+                    <div class="middle">
+                        <p class="name" th:text="${recipe.name}"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-md-1"></div>
+        </div>
+
+    </div>
+
+</div>
 
 </body>
 </html>
