@@ -28,29 +28,24 @@ public class RecipeController {
 
     @RequestMapping(value = "add", method = RequestMethod.GET)
     public String add(Model model) {
-        model.addAttribute(new RecipeForm());
-        return "new-job";
+        model.addAttribute(new Recipe());
+        return "new-recipe";
     }
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public String add(Model model, @Valid RecipeForm recipeForm, Errors errors) {
+    public String add(Model model, @Valid Recipe recipe, Errors errors) {
 
         // TODO #6 - Validate the RecipeForm model, and if valid, create a
         // new Recipe and add it to the recipeData data store. Then
         // redirect to the job detail view for the new Recipe.
 
         if (errors.hasErrors()) {
-            model.addAttribute(recipeForm);
-            return "new-job";
+            model.addAttribute(recipe);
+            return "new-recipe";
         }
 
-        Recipe newRecipe = new Recipe(recipeForm.getName(),
-                recipeData.getIngredients().findById(recipeForm.getIngredientId()),
-                recipeData.getServings().findById(recipeForm.getServingId()),
-                recipeData.getCalores().findById(recipeForm.getCalorieId()),
-                recipeData.getImageUrl().findById(recipeForm.getImageUrlId()));
-        recipeData.add(newRecipe);
-        return "redirect:/job/?id=" + Integer.toString(newRecipe.getId());
+        recipeData.add(recipe);
+        return "redirect:/recipe/?id=" + Integer.toString(recipe.getId());
 
     }
 }
