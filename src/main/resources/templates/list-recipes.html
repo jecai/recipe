@@ -22,24 +22,24 @@
             <div  th:each="recipe : ${recipes}">
                 <table  th:fragment="single-recipe" class="recipe-listing">
                     <tr>
-                        <th>Name</th>
-                        <td th:text="${recipe.name}"></td>
+                        <td><img class="recipe-detail-img" th:src="${recipe.imageUrl}"></img></td>
+                        <td class="recipe-title" th:text="${#strings.capitalizeWords(recipe.name)}"></td>
                     </tr>
                     <tr>
-                        <th>Employer</th>
-                        <td th:text="${recipe.ingredient}"></td>
-                    </tr>
-                    <tr>
-                        <th>Location</th>
+                        <th>Servings</th>
                         <td th:text="${recipe.serving}"></td>
                     </tr>
                     <tr>
-                        <th>Position Type</th>
+                        <th>Calories/Serving</th>
                         <td th:text="${recipe.calorie}"></td>
                     </tr>
                     <tr>
-                        <th>Skill</th>
-                        <td th:text="${recipe.imageUrl}"></td>
+                        <th>Ingredients</th>
+                        <td>
+                            <span th:each="ingredient : ${#strings.arraySplit(recipe.ingredient, ';')}">
+                                <li th:text="${ingredient}"></li>
+                            </span>
+                        </td>
                     </tr>
                 </table>
             </div>
