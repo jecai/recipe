@@ -15,15 +15,15 @@ import javax.validation.Valid;
 @RequestMapping("user")
 public class UserController {
 
-    @RequestMapping(value = "add", method = RequestMethod.GET)
-    public String add(Model model){
+    @RequestMapping(value = "register", method = RequestMethod.GET)
+    public String register(Model model){
         User user = new User();
         model.addAttribute("title", "Add User");
         model.addAttribute("user", user);
-        return "user/add";
+        return "register";
     }
 
-    @RequestMapping(value = "add", method = RequestMethod.POST)
+    @RequestMapping(value = "register", method = RequestMethod.POST)
     public String add(Model model, @ModelAttribute @Valid User user, Errors errors, String verify){
         model.addAttribute("verify", verify);
 
@@ -38,7 +38,7 @@ public class UserController {
             model.addAttribute(user);
             model.addAttribute("title", "Add User");
             model.addAttribute("verifyError", verifyError);
-            return "add";
+            return "register";
         }
     }
 }
