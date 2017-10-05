@@ -29,7 +29,7 @@ public class UserController {
 
         if (!errors.hasErrors() && !verify.isEmpty() && user.getPassword().equals(verify)){
             model.addAttribute("title", "Welcome, " + user.getUsername());
-            return "user/index";
+            return "index";
         }else{
             String verifyError = "";
             if(verify.isEmpty() || !user.getPassword().equals(verify)){
@@ -38,7 +38,7 @@ public class UserController {
             model.addAttribute(user);
             model.addAttribute("title", "Add User");
             model.addAttribute("verifyError", verifyError);
-            return "user/add";
+            return "add";
         }
     }
 }
