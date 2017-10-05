@@ -34,7 +34,7 @@ public class Recipe {
     @Size(min=1)
     private String imageUrl;
 
-    public Recipe(String name, String ingredient, Integer serving, Integer calorie, String imageUrl) {
+    public Recipe(String name, String ingredient, int serving, int calorie, String imageUrl) {
         this.name = name;
         this.ingredient = ingredient;
         this.serving = serving;
@@ -64,19 +64,19 @@ public class Recipe {
         this.ingredient = ingredient;
     }
 
-    public Integer getServing() {
+    public int getServing() {
         return serving;
     }
 
-    public void setServing(Integer serving) {
+    public void setServing(int serving) {
         this.serving = serving;
     }
 
-    public Integer getCalorie() {
+    public int getCalorie() {
         return calorie;
     }
 
-    public void setCalorie(Integer calorie) {
+    public void setCalorie(int calorie) {
         this.calorie = calorie;
     }
 
