@@ -1,6 +1,8 @@
 package org.recipe.controllers;
 
 import org.recipe.models.User;
+import org.recipe.models.data.UserDao;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -14,6 +16,9 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("user")
 public class UserController {
+
+    @Autowired
+    private UserDao userDao;
 
     @RequestMapping(value = "register", method = RequestMethod.GET)
     public String register(Model model){
@@ -29,6 +34,7 @@ public class UserController {
 
         if (!errors.hasErrors() && !verify.isEmpty() && user.getPassword().equals(verify)){
             model.addAttribute("title", "Welcome, " + user.getUsername());
+            userDao.save(user);
             return "index";
         }else{
             String verifyError = "";
