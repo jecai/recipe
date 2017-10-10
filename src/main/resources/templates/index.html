@@ -25,10 +25,10 @@
             <div class="col col-md-1"></div>
             <div class="col col-md-10">
                 <div th:each="recipe : ${recipes}" class="col img-container col-sm-4 text-center">
-                    <a th:href="@{/recipe?id=} + ${recipe.getId()}">
+                    <a th:href="@{/recipe?id=} + ${recipe.id}">
                         <img class="recipe-img" th:src="${recipe.imageUrl}"></img>
                         <div class="middle">
-                            <p class="name" th:text="${recipe.name}"></p>
+                            <p class="name" th:text="${#strings.capitalizeWords(recipe.name)}"></p>
                         </div>
                     </a>
                 </div>

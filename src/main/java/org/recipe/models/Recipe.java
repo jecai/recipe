@@ -1,32 +1,51 @@
 package org.recipe.models;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+@Entity
 public class Recipe {
 
+    @Id
+    @GeneratedValue
     private int id;
-    private static int nextId = 1;
 
+    @NotNull
+    @Size(min=3, max=15)
     private String name;
-    private Ingredient ingredient;
-    private Serving serving;
-    private Calorie calorie;
-    private ImageUrl imageUrl;
 
-    public Recipe() {
-        id = nextId;
-        nextId++;
+    @NotNull
+    @Size(min=3)
+    private String ingredient;
+
+    @NotNull
+    @Min(1)
+    private int serving;
+
+    @NotNull
+    @Min(0)
+    private int calorie;
+
+    @NotNull
+    @Size(min=1)
+    private String imageUrl;
+
+    public Recipe(String name, String ingredient, int serving, int calorie, String imageUrl) {
+        this.name = name;
+        this.ingredient = ingredient;
+        this.serving = serving;
+        this.calorie = calorie;
+        this.imageUrl = imageUrl;
     }
 
-    public Recipe(String aName, Ingredient aIngredient, Serving aServing,
-                  Calorie aCalorie, ImageUrl aImageUrl) {
+    public Recipe() {}
 
-        this();
-
-        name = aName;
-        ingredient = aIngredient;
-        serving = aServing;
-        calorie = aCalorie;
-        imageUrl = aImageUrl;
-
+    public int getId() {
+        return id;
     }
 
     public String getName() {
@@ -37,54 +56,36 @@ public class Recipe {
         this.name = name;
     }
 
-    public Ingredient getIngredient() {
+    public String getIngredient() {
         return ingredient;
     }
 
-    public void setIngredient(Ingredient ingredient) {
+    public void setIngredient(String ingredient) {
         this.ingredient = ingredient;
     }
 
-    public Serving getServing() {
+    public int getServing() {
         return serving;
     }
 
-    public void setServing(Serving serving) {
+    public void setServing(int serving) {
         this.serving = serving;
     }
 
-    public Calorie getCalorie() {
+    public int getCalorie() {
         return calorie;
     }
 
-    public void setCalorie(Calorie calorie) {
+    public void setCalorie(int calorie) {
         this.calorie = calorie;
     }
 
-    public ImageUrl getImageUrl() {
+    public String getImageUrl() {
         return imageUrl;
     }
 
-    public void setImageUrl(ImageUrl imageUrl) {
+    public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Recipe recipe = (Recipe) o;
-
-        return id == recipe.id;
-    }
-
-    @Override
-    public int hashCode() {
-        return id;
-    }
 }

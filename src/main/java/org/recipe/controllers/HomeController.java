@@ -1,26 +1,23 @@
 package org.recipe.controllers;
 
-import org.recipe.models.Recipe;
-import org.recipe.models.data.RecipeData;
+import org.recipe.models.data.RecipeDao;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.ArrayList;
 
-/**
- * Created by LaunchCode
- */
 @Controller
 public class HomeController {
-    private RecipeData recipeData = RecipeData.getInstance();
+
+    @Autowired
+    private RecipeDao recipeDao;
 
     @RequestMapping(value = "")
     public String index(Model model) {
-        ArrayList<Recipe> recipes = recipeData.findAll();
 
         model.addAttribute("title", "All Recipes");
-        model.addAttribute("recipes", recipes);
+        model.addAttribute("recipes", recipeDao.findAll());
 
         return "index";
     }
