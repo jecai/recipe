@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head">
+</head>
+<body>
+
+<div th:replace="fragments :: page-header"></div>
+
+<div class="container body-content">
+
+    <h1>
+        <span th:text="${#strings.capitalizeWords(menu.name)}"></span>
+        <span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span>
+    </h1>
+
+<p th:unless="${menu.recipes.size()}"><i>Please add a recipe!</i></p>
+
+<ul>
+        <li th:each="recipe : ${menu.recipes}">
+            <a th:href="@{/recipe?id=} + ${recipe.id}" th:text="${recipe.name}"></a>
+        </li>
+</ul>
+
+<p><a th:href="'/menu/add-item/' + ${menu.id}">Add Recipe</a></p>
+
+</div>
+</body>
+</html>
