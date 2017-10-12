@@ -8,6 +8,11 @@
 
 <div class="container body-content">
 
+    <h1>
+        <span th:text="${#strings.capitalizeWords(title)}"></span>
+        <span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span>
+    </h1>
+
     <form method="post" style="max-width:600px;" th:object="${recipe}">
         <div class="form-group">
             <label th:for="name">Name</label>
