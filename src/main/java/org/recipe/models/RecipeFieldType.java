@@ -2,8 +2,9 @@ package org.recipe.models;
 
 public enum RecipeFieldType {
 
-    INGREDIENT ("Ingredient"),
-    ALL ("All");
+    ALL ("All"),
+    NAME ("Name"),
+    INGREDIENT ("Ingredient");
 
     private final String name;
 
