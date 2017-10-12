@@ -14,17 +14,15 @@ import javax.validation.Valid;
 
 
 @Controller
-@RequestMapping("user")
+@RequestMapping(value = "register")
 public class UserController {
 
     @Autowired
     private UserDao userDao;
 
-    @RequestMapping(value = "register", method = RequestMethod.GET)
+    @RequestMapping(value = "", method = RequestMethod.GET)
     public String register(Model model){
-        User user = new User();
         model.addAttribute("title", "Add User");
-        model.addAttribute("user", user);
         return "register";
     }
 

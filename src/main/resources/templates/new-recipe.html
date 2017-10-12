@@ -21,7 +21,8 @@
         </div>
         <div class="form-group">
             <label th:for="ingredient">Ingredients</label>
-            <input class="form-control" th:field="*{ingredient}" />
+            <textarea class="input" class="form-control" style="height:100px;"
+                   rows="100" th:field="*{ingredient}" />
             <span th:errors="*{ingredient}" class="error"></span>
         </div>
 
