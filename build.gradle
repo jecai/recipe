@@ -33,6 +33,7 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile('org.springframework.boot:spring-boot-devtools')
 	compile('org.apache.commons:commons-csv:1.4')
+	compile('org.springframework.security:spring-security-core')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 

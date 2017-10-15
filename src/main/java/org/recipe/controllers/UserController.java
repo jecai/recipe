@@ -9,6 +9,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import javax.validation.Valid;
 
@@ -34,6 +35,7 @@ public class UserController {
 
         if (!errors.hasErrors() && !verify.isEmpty() && user.getPassword().equals(verify)){
             model.addAttribute("title", "Welcome, " + user.getUsername());
+            user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
             userDao.save(user);
             return "index";
         }else{
