@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -51,5 +49,39 @@ public class RecipeController {
         recipeDao.save(recipe);
         return "redirect:/recipe/?id=" + Integer.toString(recipe.getId());
 
+    }
+
+    @RequestMapping(value = "edit/{recipeId}", method = RequestMethod.GET)
+    public String displayEditForm(Model model, @PathVariable int recipeId) {
+        Recipe recipe = recipeDao.findOne(recipeId);
+        model.addAttribute("recipe", recipe);
+        model.addAttribute("title", "Edit Recipe: " +
+                recipe.getName());
+        model.addAttribute("recipeId", recipeId);
+        return "edit";
+    }
+
+    @RequestMapping(value = "edit", method = RequestMethod.POST)
+    public String processEditForm(Model model, int recipeId,
+                                  @ModelAttribute @Valid Recipe newRecipe,
+                                  Errors errors) {
+
+        Recipe recipe = recipeDao.findOne(recipeId);
+
+        if (errors.hasErrors()) {
+            model.addAttribute("recipe", newRecipe);
+            model.addAttribute("title", "Edit Recipe: " +
+                    recipe.getName());
+            model.addAttribute("recipeId", recipeId);
+            return "edit";
+        }
+
+        recipe.setName(newRecipe.getName());
+        recipe.setIngredient(newRecipe.getIngredient());
+        recipe.setServing(newRecipe.getServing());
+        recipe.setCalorie(newRecipe.getCalorie());
+        recipe.setImageUrl(newRecipe.getImageUrl());
+        recipeDao.save(recipe);
+        return "redirect:/recipe/?id=" + Integer.toString(recipe.getId());
     }
 }
