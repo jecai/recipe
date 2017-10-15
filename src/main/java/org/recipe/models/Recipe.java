@@ -15,26 +15,26 @@ public class Recipe {
     private int id;
 
     @NotNull
-    @Size(min=3, max=15)
+    @Size(min=1, max=150, message = "Please enter the recipe name")
     private String name;
 
     @NotNull
     @Size(min=3)
     private String ingredient;
 
-    @NotNull
+    @NotNull(message = "Please enter the number of servings")
     @Min(1)
-    private int serving;
+    private Integer serving;
 
-    @NotNull
+    @NotNull(message = "Please enter the number of calories")
     @Min(0)
-    private int calorie;
+    private Integer calorie;
 
     @NotNull
     @Size(min=1)
     private String imageUrl;
 
-    public Recipe(String name, String ingredient, int serving, int calorie, String imageUrl) {
+    public Recipe(String name, String ingredient, Integer serving, Integer calorie, String imageUrl) {
         this.name = name;
         this.ingredient = ingredient;
         this.serving = serving;
@@ -64,19 +64,19 @@ public class Recipe {
         this.ingredient = ingredient;
     }
 
-    public int getServing() {
+    public Integer getServing() {
         return serving;
     }
 
-    public void setServing(int serving) {
+    public void setServing(Integer serving) {
         this.serving = serving;
     }
 
-    public int getCalorie() {
+    public Integer getCalorie() {
         return calorie;
     }
 
-    public void setCalorie(int calorie) {
+    public void setCalorie(Integer calorie) {
         this.calorie = calorie;
     }
 
