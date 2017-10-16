@@ -9,27 +9,21 @@
 <div class="container body-content">
     <h1>Login to Recipe Tracker</h1>
 
-    <!-- TODO Build registration form
-    <p>If you don't have an account, you may <a href="/register">register</a> for one</p>-->
+    <p>If you don't have an account, you may <a href="/register">register</a> for one</p>
     <tr></tr>
-    <form name="submitForm" method="POST">
-        <div align="center">
-            <table>
-                <tr>
-                    <td>User Name</td>
-                    <td><input type="text" name="userName" /></td>
-                </tr>
-                <tr>
-                    <td>Password</td>
-                    <td><input type="password" name="password" /></td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td><input type="submit" value="Submit" /></td>
-                </tr>
-                <tr></tr>
-            </table>
-        </div>
+    <form method="post" style="max-width:600px;">
+            <div class="form-group">
+                <label th:for="username">Enter Username</label>
+                <input class="form-control" name="username" />
+                <p th:text="${usernameError}" class="error"></p>
+            </div>
+
+            <div class="form-group">
+                <label th:for="password">Password</label>
+                <input class="form-control" type="password" name="password" />
+                <p th:text="${passwordError}" class="error"></p>
+            </div>
+            <input type="submit" value="Login" />
     </form>
 
 

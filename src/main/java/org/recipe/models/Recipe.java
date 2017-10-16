@@ -3,9 +3,11 @@ package org.recipe.models;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 public class Recipe {
@@ -33,6 +35,10 @@ public class Recipe {
     @NotNull
     @Size(min=1)
     private String imageUrl;
+
+    @ManyToMany
+    private List<Menu> menus;
+
 
     public Recipe(String name, String ingredient, int serving, int calorie, String imageUrl) {
         this.name = name;
@@ -88,4 +94,7 @@ public class Recipe {
         this.imageUrl = imageUrl;
     }
 
+    public List<Menu> getMenus() {
+        return menus;
+    }
 }

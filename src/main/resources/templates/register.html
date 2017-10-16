@@ -7,17 +7,18 @@
 
     <h1 th:text="${title}">Default Title</h1>
 
-    <form method="post" style="recipes.css" th:object="${user}">
+    <form method="post" style="max-width:600px;" th:object="${user}">
         <div class="form-group">
             <label th:for="username">Enter Username</label>
             <input class="form-control" id="username" type="username" name="username" />
-            <!--<span th:errors="*{username}" class="error"></span>-->
+            <span th:errors="*{username}" class="error"></span>
+            <span th:text="${existingUsername}" class="error"></span>
         </div>
 
         <div class="form-group">
             <label th:for="password">Password</label>
             <input class="form-control" id="password" type="password" name="password" />
-            <!--<span th:errors="*{password}" class="error"></span>-->
+            <span th:errors="*{password}" class="error"></span>
         </div>
 
         <div class="form-group">

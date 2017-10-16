@@ -96,3 +96,7 @@ ul.form-group li {
 table {
     margin: 0 auto;
 }
+
+.error {
+    color: red;
+}
