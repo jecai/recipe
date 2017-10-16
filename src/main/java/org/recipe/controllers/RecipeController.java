@@ -1,6 +1,7 @@
 package org.recipe.controllers;
 
 import org.recipe.models.Recipe;
+import org.recipe.models.data.ChecklistDao;
 import org.recipe.models.data.RecipeDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,9 @@ public class RecipeController {
 
     @Autowired
     private RecipeDao recipeDao;
+
+//    @Autowired
+//    private ChecklistDao ingredientDao;
 
     // The detail display for a given Recipe at URLs like /job?id=17
     @RequestMapping(value = "", method = RequestMethod.GET)
@@ -47,6 +51,13 @@ public class RecipeController {
             model.addAttribute(recipe);
             return "new-recipe";
         }
+
+//        String[] ingredientsArray = recipe.getIngredient().split("/n");
+//        for(String oneIngredient : ingredientsArray){
+//            ingredientDao.save(oneIngredient);
+//        }
+
+//        ingredientDao.save(recipe.getIngredient());
 
         recipeDao.save(recipe);
         return "redirect:/recipe/?id=" + Integer.toString(recipe.getId());

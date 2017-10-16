@@ -35,10 +35,20 @@
                     </tr>
                     <tr>
                         <th>Ingredients</th>
+
                         <td>
-                            <span th:each="ingredient : ${#strings.arraySplit(recipe.ingredient, ';')}">
-                                <li th:text="${ingredient}"></li>
-                            </span>
+                            <form method="post" style="max-width:600px;" th:object="${checklist}">
+                            <div class="form-group">
+                            <li style="list-style-type:none"
+                                    th:each="item : ${#strings.arraySplit(recipe.ingredient, '&#10;')}">
+                                    <input type="checkbox" th:value="${item}"/>
+                                           <!--th:field="*{checklist[__${stat.index}__]}"-->
+                                    <label th:text="${item}"></label>
+                                    <!--<span th:errors="*{checklist}" class="error"></span>-->
+                            </li>
+                            </div>
+                                <input type="submit" value="Add Ingredients" />
+                            </form>
                         </td>
                     </tr>
                 </table>
