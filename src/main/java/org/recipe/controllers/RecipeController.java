@@ -14,7 +14,7 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping(value = "recipe")
-public class RecipeController {
+public class RecipeController extends AbstractController {
 
     @Autowired
     private RecipeDao recipeDao;

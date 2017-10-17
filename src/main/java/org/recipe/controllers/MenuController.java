@@ -16,7 +16,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping(value = "menu")
-public class MenuController {
+public class MenuController extends AbstractController {
 
     @Autowired
     private MenuDao menuDao;

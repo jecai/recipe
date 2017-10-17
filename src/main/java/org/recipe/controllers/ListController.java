@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 @Controller
 @RequestMapping(value = "list")
-public class ListController {
+public class ListController extends AbstractController {
 
     @Autowired
     private RecipeDao recipeDao;

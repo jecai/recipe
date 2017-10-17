@@ -7,29 +7,31 @@
 
     <h1 th:text="${title}">Default Title</h1>
 
-    <form method="post" style="max-width:600px;" th:object="${user}">
+    <form method="post" style="max-width:600px;" th:object="${registerForm}">
         <div class="form-group">
-            <label th:for="username">Enter Username</label>
-            <input class="form-control" id="username" type="username" name="username" />
+            <label th:for="username">Username</label>
+            <input field="*{username}" />
             <span th:errors="*{username}" class="error"></span>
-            <span th:text="${existingUsername}" class="error"></span>
+
         </div>
 
         <div class="form-group">
             <label th:for="password">Password</label>
-            <input class="form-control" id="password" type="password" name="password" />
+            <input th:field="*{password}" type="password"/>
             <span th:errors="*{password}" class="error"></span>
         </div>
 
         <div class="form-group">
-            <label th:for="verify">Verify Password</label>
-            <input class="form-control" id="verify" type="password" name="verify" />
+            <label th:for="verifyPassword">Verify Password</label>
+            <input th:field="*{verifyPassword}" type="password" />
             <div class="error" th:text="${verifyError}"></div>
         </div>
 
         <input type="submit" value="Add" />
 
     </form>
+
+    <span th:text="${existingUsername}" class="error"></span>
 </div>
 </body>
 </html>

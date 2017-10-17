@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 @Controller
 @RequestMapping("search")
-public class SearchController {
+public class SearchController extends AbstractController {
 
     @Autowired
     private RecipeDao recipeDao;
