@@ -14,4 +14,5 @@ import javax.transaction.Transactional;
 @Repository
 @Transactional
 public interface RecipeDao extends CrudRepository<Recipe,Integer> {
+
 }

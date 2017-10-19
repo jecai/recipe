@@ -12,7 +12,7 @@
             <label th:for="username">Username</label>
             <input th:field="*{username}" />
             <span th:errors="*{username}" class="error"></span>
-
+            <span th:text="${existingUsername}" class="error"></span>
         </div>
 
         <div class="form-group">
@@ -31,7 +31,6 @@
 
     </form>
 
-    <span th:text="${existingUsername}" class="error"></span>
 </div>
 </body>
 </html>
