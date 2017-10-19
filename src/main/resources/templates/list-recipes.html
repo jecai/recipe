@@ -22,8 +22,11 @@
             <div  th:each="recipe : ${recipes}">
                 <table  th:fragment="single-recipe" class="recipe-listing">
                     <tr>
-                        <td><img class="recipe-detail-img" th:src="${recipe.imageUrl}"></img></td>
-                        <td class="recipe-title" th:text="${#strings.capitalizeWords(recipe.name)}"></td>
+                        <td><img class="recipe-detail-img" th:src="${recipe.imageUrl}" /></td>
+                        <td>
+                            <p class="recipe-title" th:text="${#strings.capitalizeWords(recipe.name)}" />
+                            <p th:text="'By: '+ ${recipe.author.username}" />
+                        </td>
                     </tr>
                     <tr>
                         <th>Servings</th>
