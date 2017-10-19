@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 
 @Controller
@@ -22,9 +23,10 @@ public class ListController extends AbstractController {
     private RecipeDao recipeDao;
 
     @RequestMapping(value = "")
-    public String list(Model model) {
+    public String list(Model model, HttpServletRequest request) {
         RecipeFieldType[] fields = RecipeFieldType.values();
         model.addAttribute("fields", fields);
+        model.addAttribute("sessionOn", isSessionActive(request.getSession()));
         return "list";
     }
 
@@ -65,11 +67,11 @@ public class ListController extends AbstractController {
 //    }
 
     @RequestMapping(value = "all")
-    public String listAllJobs(Model model) {
+    public String listAllJobs(Model model, HttpServletRequest request) {
 
         model.addAttribute("title", "All Recipes");
         model.addAttribute("recipes", recipeDao.findAll());
-
+        model.addAttribute("sessionOn", isSessionActive(request.getSession()));
         return "list-recipes";
     }
 

@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 
 
@@ -22,17 +23,19 @@ public class SearchController extends AbstractController {
     private RecipeDao recipeDao;
 
     @RequestMapping(value = "")
-    public String search(Model model) {
+    public String search(Model model, HttpServletRequest request) {
         model.addAttribute(new SearchForm());
+        model.addAttribute("sessionOn", isSessionActive(request.getSession()));
         return "search";
     }
 
     @RequestMapping(value = "results")
     public String search(Model model,
-                         @ModelAttribute SearchForm searchForm) {
+                         @ModelAttribute SearchForm searchForm, HttpServletRequest request) {
 
         ArrayList<Recipe> recipes = new ArrayList<>();
         Iterable<Recipe> recipeList = recipeDao.findAll();
+        model.addAttribute("sessionOn", isSessionActive(request.getSession()));
 
         if (searchForm.getSearchField().equals(RecipeFieldType.ALL)) {
             for (Recipe recipe : recipeList) {

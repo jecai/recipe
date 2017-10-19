@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -25,40 +26,43 @@ public class MenuController extends AbstractController {
     private RecipeDao recipeDao;
 
     @RequestMapping(value = "")
-    public String index(Model model){
+    public String index(Model model, HttpServletRequest request){
 
         model.addAttribute("menus", menuDao.findAll());
         model.addAttribute("title", "Menus");
+        model.addAttribute("sessionOn", isSessionActive(request.getSession()));
 
         return "menu/index";
     }
 
     @RequestMapping(value = "add", method = RequestMethod.GET)
-    public String displayMenuForm(Model model){
+    public String displayMenuForm(Model model, HttpServletRequest request){
 
         model.addAttribute(new Menu());
         model.addAttribute("title", "Add Menu");
+        model.addAttribute("sessionOn", isSessionActive(request.getSession()));
 
         return "menu/add";
     }
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String processMenuForm(Model model, @ModelAttribute @Valid
-            Menu menu, Errors errors) {
+            Menu menu, Errors errors, HttpServletRequest request) {
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Menu");
             return "menu/add";
         }
-
+        model.addAttribute("sessionOn", isSessionActive(request.getSession()));
         menuDao.save(menu);
 
         return "redirect:view/" + menu.getId();
     }
 
     @RequestMapping(value = "view/{menuId}", method = RequestMethod.GET)
-    public String viewMenu(Model model, @PathVariable int menuId) {
+    public String viewMenu(Model model, @PathVariable int menuId, HttpServletRequest request) {
 
+        model.addAttribute("sessionOn", isSessionActive(request.getSession()));
         Menu menu = menuDao.findOne(menuId);
         model.addAttribute("menu", menu);
 
@@ -66,12 +70,12 @@ public class MenuController extends AbstractController {
     }
 
     @RequestMapping(value = "add-item/{menuId}", method = RequestMethod.GET)
-    public String addItem(Model model, @PathVariable int menuId) {
+    public String addItem(Model model, @PathVariable int menuId, HttpServletRequest request) {
 
         Menu menu = menuDao.findOne(menuId);
         MenuForm form = new MenuForm(
                 recipeDao.findAll(), menu);
-
+        model.addAttribute("sessionOn", isSessionActive(request.getSession()));
         model.addAttribute("title", "Add recipe to: " + menu.getName());
         model.addAttribute("form", form);
 

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @Controller
@@ -29,14 +30,15 @@ public class RecipeController extends AbstractController {
     }
 
     @RequestMapping(value = "add", method = RequestMethod.GET)
-    public String add(Model model) {
+    public String add(Model model, HttpServletRequest request) {
         model.addAttribute("title", "Add Recipe");
         model.addAttribute(new Recipe());
+        model.addAttribute("sessionOn", isSessionActive(request.getSession()));
         return "new-recipe";
     }
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public String add(Model model, @ModelAttribute @Valid Recipe recipe, Errors errors) {
+    public String add(Model model, @ModelAttribute @Valid Recipe recipe, Errors errors, HttpServletRequest request) {
 
         // TODO #6 - Validate the RecipeForm model, and if valid, create a
         // new Recipe and add it to the recipeData data store. Then
@@ -47,7 +49,7 @@ public class RecipeController extends AbstractController {
             model.addAttribute(recipe);
             return "new-recipe";
         }
-
+        model.addAttribute("sessionOn", isSessionActive(request.getSession()));
         recipeDao.save(recipe);
         return "redirect:/recipe/?id=" + Integer.toString(recipe.getId());
 

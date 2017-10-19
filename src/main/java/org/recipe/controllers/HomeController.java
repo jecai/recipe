@@ -6,6 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
+
 
 @Controller
 public class HomeController extends AbstractController {
@@ -14,10 +16,11 @@ public class HomeController extends AbstractController {
     private RecipeDao recipeDao;
 
     @RequestMapping(value = "")
-    public String index(Model model) {
+    public String index(Model model, HttpServletRequest request) {
 
         model.addAttribute("title", "All Recipes");
         model.addAttribute("recipes", recipeDao.findAll());
+        model.addAttribute("sessionOn", isSessionActive(request.getSession()));
 
         return "index";
     }

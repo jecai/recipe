@@ -18,10 +18,10 @@
             <div class="navbar-header">
                 <a th:href="@{/}" class="navbar-brand">Recipe Tracker</a>
             </div>
-            <div th:if="${sessionOn} == false" class="navbar-header">
+            <div class="navbar-header">
                 <a th:href="@{/search}" class="navbar-brand">Search</a>
             </div>
-            <div th:if="${sessionOn} == false" class="navbar-header">
+            <div class="navbar-header">
                 <a th:href="@{/list}" class="navbar-brand">List</a>
             </div>
             <div th:if="${sessionOn} == true" class="navbar-header">
