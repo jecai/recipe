@@ -28,17 +28,13 @@ public abstract class AbstractController {
         session.setAttribute(userSessionKey, user.getId());
     }
 
-    protected void clearSession(HttpSession session){
-        session.setAttribute(userSessionKey, null);
-    }
-
     protected boolean isSessionActive(HttpSession session){
         Integer userId = (Integer) session.getAttribute(userSessionKey);
         return userId != null;
     }
 
-    @ModelAttribute("userId")
-    public Integer getUserIdFromSession(HttpServletRequest request) {
-        return (Integer) request.getSession().getAttribute(userSessionKey);
-    }
+//    @ModelAttribute("userId")
+//    public Integer getUserIdFromSession(HttpServletRequest request) {
+//        return (Integer) request.getSession().getAttribute(userSessionKey);
+//    }
 }

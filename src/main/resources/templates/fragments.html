@@ -18,13 +18,25 @@
             <div class="navbar-header">
                 <a th:href="@{/}" class="navbar-brand">Recipe Tracker</a>
             </div>
-            <div class="navbar-collapse collapse">
+            <div th:if="${sessionOn} == false" class="navbar-header">
+                <a th:href="@{/search}" class="navbar-brand">Search</a>
+            </div>
+            <div th:if="${sessionOn} == false" class="navbar-header">
+                <a th:href="@{/list}" class="navbar-brand">List</a>
+            </div>
+            <div th:if="${sessionOn} == true" class="navbar-header">
+                <a th:href="@{/recipe/add}" class="navbar-brand">Add</a>
+            </div>
+            <div th:if="${sessionOn} == true" class="navbar-header">
+                <a th:href="@{/menu}" class="navbar-brand">Menus</a>
+            </div>
+            <div th:if="${sessionOn} == false" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a th:href="@{/search}">Search</a></li>
-                    <li><a th:href="@{/list}">List</a></li>
-                    <li><a th:href="@{/recipe/add}">Add</a></li>
-                    <li><a th:href="@{/menu}">Menus</a></li>
                     <li><a th:href="@{/login}">Login</a></li>
+                </ul>
+            </div>
+            <div th:if="${sessionOn} == true" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
                     <li><a th:href="@{/logout}">Logout</a></li>
                 </ul>
             </div>

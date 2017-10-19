@@ -27,7 +27,7 @@ public class AuthenticationController extends AbstractController {
 
     @RequestMapping(value = "register", method = RequestMethod.GET)
     public String displayRegister(HttpServletRequest request, Model model) {
-        model.addAttribute("sessionActive", isSessionActive(request.getSession()));
+        model.addAttribute("sessionOn", isSessionActive(request.getSession()));
         model.addAttribute("title", "Register");
         model.addAttribute("registerForm", new RegisterForm());
         return "register";
@@ -35,7 +35,7 @@ public class AuthenticationController extends AbstractController {
 
     @RequestMapping(value = "login", method = RequestMethod.GET)
     public String displayLogin(Model model, HttpServletRequest request) {
-        model.addAttribute("sessionActive", isSessionActive(request.getSession()));
+        model.addAttribute("sessionOn", isSessionActive(request.getSession()));
         model.addAttribute("title", "Login");
         model.addAttribute("loginForm", new LoginForm());
         return "login";
@@ -45,7 +45,7 @@ public class AuthenticationController extends AbstractController {
     public String register(Model model, @ModelAttribute @Valid RegisterForm registerForm, Errors errors, HttpServletRequest request) {
         if (errors.hasErrors()) {
             model.addAttribute("title", "Register");
-            model.addAttribute("sessionActive", isSessionActive(request.getSession()));
+            model.addAttribute("sessionOn", isSessionActive(request.getSession()));
             return "register";
         }
 
@@ -54,7 +54,7 @@ public class AuthenticationController extends AbstractController {
         if (existUser != null) {
             model.addAttribute("existingUsername", "Username already exists");
             model.addAttribute("title", "Register");
-            model.addAttribute("sessionActive", isSessionActive(request.getSession()));
+            model.addAttribute("sessionOn", isSessionActive(request.getSession()));
             return "register";
         }
         String verifyError = "";
@@ -67,6 +67,7 @@ public class AuthenticationController extends AbstractController {
             verifyError = "Please enter a matching Password";
             model.addAttribute("title", "Register");
             model.addAttribute("verifyError", verifyError);
+            model.addAttribute("sessionOn", isSessionActive(request.getSession()));
             return "register";
         }
     }
@@ -75,6 +76,7 @@ public class AuthenticationController extends AbstractController {
     public String login(Model model, @ModelAttribute @Valid LoginForm loginForm, Errors errors, HttpServletRequest request) {
         if (errors.hasErrors()) {
             model.addAttribute("title", "Login");
+            model.addAttribute("sessionOn", isSessionActive(request.getSession()));
             return "login";
         }
 
@@ -83,20 +85,20 @@ public class AuthenticationController extends AbstractController {
 
         if (user == null) {
             model.addAttribute("usernameError", "Invalid username! Please try again!");
-            model.addAttribute("sessionActive", isSessionActive(request.getSession()));
+            model.addAttribute("sessionOn", isSessionActive(request.getSession()));
             model.addAttribute("title", "Login");
             return "login";
         }
 
         if (!user.isMatchingPassword(password)) {
             model.addAttribute("passwordError", "Wrong password! Please try again!");
-            model.addAttribute("sessionActive", isSessionActive(request.getSession()));
+            model.addAttribute("sessionOn", isSessionActive(request.getSession()));
             model.addAttribute("title", "Login");
             return "login";
         }
 
         setUserInSession(request.getSession(), user);
-        return "redirect:/index";
+        return "redirect:/menu";
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
