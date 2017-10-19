@@ -2,7 +2,6 @@ package org.recipe.controllers;
 
 import org.recipe.models.Ingredient;
 import org.recipe.models.Recipe;
-import org.recipe.models.data.IngredientDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
