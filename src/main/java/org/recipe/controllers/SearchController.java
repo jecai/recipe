@@ -49,6 +49,12 @@ public class SearchController extends AbstractController {
                     recipes.add(recipe);
                 }
             }
+        } else if (searchForm.getSearchField().equals(RecipeFieldType.NAME)) {
+            for (Recipe recipe : recipeList) {
+                if (recipe.getName().toLowerCase().contains(searchForm.getKeyword())) {
+                    recipes.add(recipe);
+                }
+            }
         }
         model.addAttribute("recipes", recipes);
         return "search";

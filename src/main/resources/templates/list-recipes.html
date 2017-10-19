@@ -15,7 +15,7 @@
     </div>
 
     <div th:fragment="recipes-list">
-        <div th:if="${recipes} and ${recipes.size()}">
+        <div th:if="${recipes}">
 
             <h3 th:text="${recipes.size() + ' Result(s)'}"></h3>
 
