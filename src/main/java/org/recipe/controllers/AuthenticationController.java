@@ -30,7 +30,7 @@ public class AuthenticationController extends AbstractController {
         model.addAttribute("sessionOn", isSessionActive(request.getSession()));
         model.addAttribute("title", "Register");
         model.addAttribute("registerForm", new RegisterForm());
-        return "register";
+        return "user/register";
     }
 
     @RequestMapping(value = "login", method = RequestMethod.GET)
@@ -38,7 +38,7 @@ public class AuthenticationController extends AbstractController {
         model.addAttribute("sessionOn", isSessionActive(request.getSession()));
         model.addAttribute("title", "Login");
         model.addAttribute("loginForm", new LoginForm());
-        return "login";
+        return "user/login";
     }
 
     @RequestMapping(value = "register", method = RequestMethod.POST)
@@ -46,7 +46,7 @@ public class AuthenticationController extends AbstractController {
         if (errors.hasErrors()) {
             model.addAttribute("title", "Register");
             model.addAttribute("sessionOn", isSessionActive(request.getSession()));
-            return "register";
+            return "user/register";
         }
 
         User existUser = userDao.findByUsername(registerForm.getUsername());
@@ -55,7 +55,7 @@ public class AuthenticationController extends AbstractController {
             model.addAttribute("existingUsername", "Username already exists");
             model.addAttribute("title", "Register");
             model.addAttribute("sessionOn", isSessionActive(request.getSession()));
-            return "register";
+            return "user/register";
         }
         String verifyError = "";
         if (registerForm.getVerifyPassword().equals(registerForm.getPassword())) {
@@ -68,7 +68,7 @@ public class AuthenticationController extends AbstractController {
             model.addAttribute("title", "Register");
             model.addAttribute("verifyError", verifyError);
             model.addAttribute("sessionOn", isSessionActive(request.getSession()));
-            return "register";
+            return "user/register";
         }
     }
 
@@ -77,7 +77,7 @@ public class AuthenticationController extends AbstractController {
         if (errors.hasErrors()) {
             model.addAttribute("title", "Login");
             model.addAttribute("sessionOn", isSessionActive(request.getSession()));
-            return "login";
+            return "user/login";
         }
 
         User user = userDao.findByUsername(loginForm.getUsername());
@@ -87,14 +87,14 @@ public class AuthenticationController extends AbstractController {
             model.addAttribute("usernameError", "Invalid username! Please try again!");
             model.addAttribute("sessionOn", isSessionActive(request.getSession()));
             model.addAttribute("title", "Login");
-            return "login";
+            return "user/login";
         }
 
         if (!user.isMatchingPassword(password)) {
             model.addAttribute("passwordError", "Wrong password! Please try again!");
             model.addAttribute("sessionOn", isSessionActive(request.getSession()));
             model.addAttribute("title", "Login");
-            return "login";
+            return "user/login";
         }
 
         setUserInSession(request.getSession(), user);
