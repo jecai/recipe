@@ -48,6 +48,7 @@ public class RecipeController extends AbstractController {
             return "new-recipe";
         }
         model.addAttribute("sessionOn", isSessionActive(request.getSession()));
+        recipe.setAuthor(getUserFromSession(request.getSession()));
         recipeDao.save(recipe);
         return "redirect:/recipe/?id=" + Integer.toString(recipe.getId());
 

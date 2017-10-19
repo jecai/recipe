@@ -1,9 +1,6 @@
 package org.recipe.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -39,6 +36,8 @@ public class Recipe {
     @ManyToMany
     private List<Menu> menus;
 
+    @ManyToOne
+    private User author;
 
     public Recipe(String name, String ingredient, int serving, int calorie, String imageUrl) {
         this.name = name;
@@ -96,5 +95,13 @@ public class Recipe {
 
     public List<Menu> getMenus() {
         return menus;
+    }
+
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
     }
 }
