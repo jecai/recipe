@@ -14,7 +14,7 @@
 
     <br/>
     <a th:href="@{/recipe/edit/} + ${recipe.id}" >
-        <button class="center-block">Edit Recipe</button>
+        <button th:if="${isAuthor}" class="center-block">Edit Recipe</button>
     </a>
 </div>
 
