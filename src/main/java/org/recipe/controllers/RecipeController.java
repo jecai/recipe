@@ -27,6 +27,7 @@ public class RecipeController extends AbstractController {
         model.addAttribute("recipe", recipe);
         model.addAttribute("isAuthor",
                 getUserFromSession(request.getSession()) == recipe.getAuthor());
+        model.addAttribute("sessionOn", isSessionActive(request.getSession()));
         return "recipe-detail";
     }
 
@@ -58,12 +59,13 @@ public class RecipeController extends AbstractController {
     }
 
     @RequestMapping(value = "edit/{recipeId}", method = RequestMethod.GET)
-    public String displayEditForm(Model model, @PathVariable int recipeId) {
+    public String displayEditForm(Model model, @PathVariable int recipeId, HttpServletRequest request) {
         Recipe recipe = recipeDao.findOne(recipeId);
         model.addAttribute("recipe", recipe);
         model.addAttribute("title", "Edit Recipe: " +
                 recipe.getName());
         model.addAttribute("recipeId", recipeId);
+        model.addAttribute("sessionOn", isSessionActive(request.getSession()));
         return "edit";
     }
 
@@ -95,6 +97,7 @@ public class RecipeController extends AbstractController {
         recipe.setCalorie(newRecipe.getCalorie());
         recipe.setImageUrl(newRecipe.getImageUrl());
         recipeDao.save(recipe);
+        model.addAttribute("sessionOn", isSessionActive(request.getSession()));
         return "redirect:/recipe/?id=" + recipe.getId();
     }
 }
