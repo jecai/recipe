@@ -23,9 +23,11 @@ public class RecipeController extends AbstractController {
     public String index(Model model, int id, HttpServletRequest request) {
 
         //get the Recipe with the given ID and pass it into the view
-        model.addAttribute("recipe", recipeDao.findOne(id));
+        Recipe recipe = recipeDao.findOne(id);
+        model.addAttribute("recipe", recipe);
+        model.addAttribute("isAuthor",
+                getUserFromSession(request.getSession()) == recipe.getAuthor());
         model.addAttribute("sessionOn", isSessionActive(request.getSession()));
-
         return "recipe-detail";
     }
 
@@ -52,7 +54,7 @@ public class RecipeController extends AbstractController {
         model.addAttribute("sessionOn", isSessionActive(request.getSession()));
         recipe.setAuthor(getUserFromSession(request.getSession()));
         recipeDao.save(recipe);
-        return "redirect:/recipe/?id=" + Integer.toString(recipe.getId());
+        return "redirect:/recipe/?id=" + recipe.getId();
 
     }
 
@@ -74,7 +76,14 @@ public class RecipeController extends AbstractController {
 
         Recipe recipe = recipeDao.findOne(recipeId);
 
-        if (errors.hasErrors()) {
+        if (getUserFromSession(request.getSession()) != recipe.getAuthor()) {
+            model.addAttribute("error", "You are not the author of this recipe");
+            model.addAttribute("recipe", recipe);
+            model.addAttribute("title", "Edit Recipe: " +
+                    recipe.getName());
+            model.addAttribute("recipeId", recipeId);
+            return "edit";
+        } else if (errors.hasErrors()) {
             model.addAttribute("recipe", newRecipe);
             model.addAttribute("title", "Edit Recipe: " +
                     recipe.getName());
@@ -89,6 +98,6 @@ public class RecipeController extends AbstractController {
         recipe.setImageUrl(newRecipe.getImageUrl());
         recipeDao.save(recipe);
         model.addAttribute("sessionOn", isSessionActive(request.getSession()));
-        return "redirect:/recipe/?id=" + Integer.toString(recipe.getId());
+        return "redirect:/recipe/?id=" + recipe.getId();
     }
 }

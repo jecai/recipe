@@ -13,6 +13,8 @@
         <span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span>
     </h1>
 
+    <p class="error" th:text="${error}"></p>
+
     <form method="post" style="max-width:600px;" th:object="${recipe}" action="/recipe/edit">
         <div class="form-group">
             <label th:for="name">Name</label>
