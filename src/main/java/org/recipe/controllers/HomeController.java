@@ -29,7 +29,7 @@ public class HomeController extends AbstractController {
     @RequestMapping(value = "/home")
     public String userIndex(Model model, HttpServletRequest request) {
         User user = getUserFromSession(request.getSession());
-        model.addAttribute("title", user.getUsername() + " Recipes");
+        model.addAttribute("title", user.getUsername() + "'s Recipes");
         model.addAttribute("recipes", recipeDao.findByAuthor(user));
         model.addAttribute("sessionOn", isSessionActive(request.getSession()));
 
