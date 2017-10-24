@@ -30,7 +30,7 @@ public class HomeController extends AbstractController {
     public String userIndex(Model model, HttpServletRequest request) {
         User user = getUserFromSession(request.getSession());
         model.addAttribute("title", user.getUsername() + " Recipes");
-        model.addAttribute("recipes", recipeDao.findOne(user.getId()));
+        model.addAttribute("recipes", recipeDao.findByAuthor(user));
         model.addAttribute("sessionOn", isSessionActive(request.getSession()));
 
         return "index";

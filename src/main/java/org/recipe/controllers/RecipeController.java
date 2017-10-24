@@ -20,10 +20,12 @@ public class RecipeController extends AbstractController {
 
     // The detail display for a given Recipe at URLs like /job?id=17
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public String index(Model model, int id) {
+    public String index(Model model, int id, HttpServletRequest request) {
 
         //get the Recipe with the given ID and pass it into the view
         model.addAttribute("recipe", recipeDao.findOne(id));
+        model.addAttribute("sessionOn", isSessionActive(request.getSession()));
+
         return "recipe-detail";
     }
 
