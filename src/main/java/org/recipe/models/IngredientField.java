@@ -45,7 +45,7 @@ public class IngredientField {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        org.recipe.models.IngredientField ingredientField = (org.recipe.models.IngredientField) o;
+        IngredientField ingredientField = (org.recipe.models.IngredientField) o;
 
         return id == ingredientField.getId();
     }

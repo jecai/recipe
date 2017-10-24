@@ -1,7 +1,7 @@
 package org.recipe.controllers;
 
 import org.recipe.models.Ingredient;
-import org.recipe.models.Recipe;
+import org.recipe.models.data.IngredientDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,70 +20,72 @@ public class IngredientController {
     @Autowired
     private IngredientDao ingredientDao;
 
+    //display id for ingredients
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public String index(Model model, int id) {
+    public String index(Model model, int ingredientId) {
 
-        //get the Recipe with the given ID and pass it into the view
-        model.addAttribute("recipe", ingredientDao.findOne(id));
-        return "recipe-detail";
+        //get the Ingredient with the given ID and pass it into the view
+        model.addAttribute("ingredient", ingredientDao.findOne(ingredientId));
+        return "ingredient-detail";
     }
 
+    //adding the Ingredient
     @RequestMapping(value = "add", method = RequestMethod.GET)
     public String add(Model model) {
         model.addAttribute("title", "Add Ingredient");
-        model.addAttribute(new Ingredient());
-        return "new-recipe";
+        model.addAttribute("unit", "Add Unit Measurement");
+        return "new-ingredient";
+
     }
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
-    public String add(Model model, @ModelAttribute @Valid Recipe recipe, Errors errors) {
-
-        // TODO #6 - Validate the RecipeForm model, and if valid, create a
-        // new Recipe and add it to the recipeData data store. Then
-        // redirect to the job detail view for the new Recipe.
+    public String add(Model model, @ModelAttribute @Valid Ingredient ingredient, Errors errors) {
 
         if (errors.hasErrors()) {
-            model.addAttribute("title", "Add Recipe");
-            model.addAttribute(recipe);
-            return "new-recipe";
+            model.addAttribute("title", "Add Ingredient");
+            model.addAttribute("unit", "Add Unit Measurement");
+            model.addAttribute(ingredient);
+            return "new-ingredient";
         }
 
         ingredientDao.save(ingredient);
-        return "redirect:/ingredient/?id=" + Integer.toString(ingredientDao.getId());
+        return "redirect:/ingredient/?id=" + Integer.toString(ingredient.getIngredientId());
 
     }
 
-    @RequestMapping(value = "edit/{ingredientID}", method = RequestMethod.GET)
+    //edit the ingredient
+    @RequestMapping(value = "edit/{ingredientId}", method = RequestMethod.GET)
     public String displayEditForm(Model model, @PathVariable int ingredientID) {
         Ingredient ingredient = ingredientDao.findOne(ingredientID);
         model.addAttribute("ingredient", ingredient);
         model.addAttribute("title", "Edit Ingredient: " +
                 ingredient.getIngredientName());
+        model.addAttribute("unit", "Edit Unit Measurement:" +
+                ingredient.getIngredientUnit());
         model.addAttribute("ingredientID", ingredientID);
         return "edit";
     }
 
-    @RequestMapping(value = "edit", method = RequestMethod.POST)
-    public String processEditForm(Model model, int recipeId,
-                                  @ModelAttribute @Valid Recipe newRecipe,
+    @RequestMapping(value = "editing", method = RequestMethod.POST)
+    public String processEditForm(Model model, int ingredientID,
+                                  @ModelAttribute @Valid Ingredient newIngredient,
                                   Errors errors) {
 
-        Recipe recipe = ingredientDao.findOne(recipeId);
+        Ingredient ingredient = ingredientDao.findOne(ingredientID);
 
         if (errors.hasErrors()) {
             model.addAttribute("ingredient", newIngredient);
             model.addAttribute("title", "Edit Ingredient: " +
-                    ingredient.get());
+                    ingredient.getIngredientName());
+            model.addAttribute("unit", "Edit Unit Measurement: " +
+                    ingredient.getIngredientUnit());
             model.addAttribute("ingredientID", ingredientID);
             return "edit";
         }
 
-        recipe.setName(newIngredient.getName());
-        recipe.setIngredient(newRecipe.getIngredient());
-        recipe.setServing(newRecipe.getServing());
-        recipe.setCalorie(newRecipe.getCalorie());
-        recipe.setImageUrl(newRecipe.getImageUrl());
+        ingredient.setIngredientName(newIngredient.getIngredientName());
+        ingredient.setIngredientUnit(newIngredient.getIngredientUnit());
         ingredientDao.save(ingredient);
-        return "redirect:/recipe/?id=" + Integer.toString(recipe.getId());
+        return "redirect:/ingredient/?id=" + Integer.toString(ingredient.getIngredientId());
     }
 }

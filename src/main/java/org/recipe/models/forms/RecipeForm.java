@@ -1,37 +1,29 @@
 //package org.recipe.models.forms;
 //
-//import org.recipe.models.Calorie;
-//import org.recipe.models.ImageUrl;
+//
 //import org.recipe.models.Ingredient;
-//import org.recipe.models.Serving;
-//import org.recipe.models.data.RecipeData;
+//import org.recipe.models.Recipe;
 //
 //import javax.validation.constraints.NotNull;
-//import javax.validation.constraints.Size;
-//import java.util.ArrayList;
+//import java.util.List;
 //
 //public class RecipeForm {
 //
-//    @NotNull
-//    @Size(min=1, message = "Name may not be empty")
-//    private String name;
+//    private Recipe recipe;
+//    private Iterable<Ingredient> ingredients;
 //
 //    @NotNull
 //    private int ingredientId;
 //
 //    @NotNull
-//    private int servingId;
+//    private String ingredientName;
 //
 //    @NotNull
-//    private int calorieId;
+//    private String ingredientUnit;
 //
-//    @NotNull
-//    private int imageUrlId;
 //
-//    private ArrayList<Ingredient> ingredients;
-//    private ArrayList<Serving> servings;
-//    private ArrayList<Calorie> calories;
-//    private ArrayList<ImageUrl> imageUrls;
+//    private List<Ingredient> ingredients;
+//
 //
 //    public RecipeForm() {
 //

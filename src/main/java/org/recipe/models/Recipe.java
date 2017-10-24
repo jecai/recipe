@@ -3,9 +3,11 @@ package org.recipe.models;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 public class Recipe {
@@ -20,7 +22,8 @@ public class Recipe {
 
     @NotNull
     @Size(min=3)
-    private String ingredient;
+    @ManyToMany
+    private List<Ingredient>ingredient;
 
     @NotNull(message = "Please enter the number of servings")
     @Min(1)
@@ -34,7 +37,7 @@ public class Recipe {
     @Size(min=1)
     private String imageUrl;
 
-    public Recipe(String name, String ingredient, Integer serving, Integer calorie, String imageUrl) {
+    public Recipe(String name, List<Ingredient> ingredient, Integer serving, Integer calorie, String imageUrl) {
         this.name = name;
         this.ingredient = ingredient;
         this.serving = serving;
@@ -56,13 +59,17 @@ public class Recipe {
         this.name = name;
     }
 
-    public String getIngredient() {
+    public List<Ingredient> getIngredient() {
         return ingredient;
     }
 
-    public void setIngredient(String ingredient) {
-        this.ingredient = ingredient;
-    }
+    //    public String getIngredient() {
+//        return ingredient;
+//    }
+//
+//    public void setIngredient(String ingredient) {
+//        this.ingredient = ingredient;
+//    }
 
     public Integer getServing() {
         return serving;
