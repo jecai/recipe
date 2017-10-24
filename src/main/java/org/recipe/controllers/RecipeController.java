@@ -46,12 +46,12 @@ public class RecipeController extends AbstractController {
         // new Recipe and add it to the recipeData data store. Then
         // redirect to the job detail view for the new Recipe.
 
+        model.addAttribute("sessionOn", isSessionActive(request.getSession()));
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Recipe");
             model.addAttribute(recipe);
             return "new-recipe";
         }
-        model.addAttribute("sessionOn", isSessionActive(request.getSession()));
         recipe.setAuthor(getUserFromSession(request.getSession()));
         recipeDao.save(recipe);
         return "redirect:/recipe/?id=" + recipe.getId();
@@ -62,8 +62,7 @@ public class RecipeController extends AbstractController {
     public String displayEditForm(Model model, @PathVariable int recipeId, HttpServletRequest request) {
         Recipe recipe = recipeDao.findOne(recipeId);
         model.addAttribute("recipe", recipe);
-        model.addAttribute("title", "Edit Recipe: " +
-                recipe.getName());
+        model.addAttribute("title", "Edit Recipe: " + recipe.getName());
         model.addAttribute("recipeId", recipeId);
         model.addAttribute("sessionOn", isSessionActive(request.getSession()));
         return "edit";
@@ -76,17 +75,17 @@ public class RecipeController extends AbstractController {
 
         Recipe recipe = recipeDao.findOne(recipeId);
 
+        model.addAttribute("sessionOn", isSessionActive(request.getSession()));
+
         if (getUserFromSession(request.getSession()) != recipe.getAuthor()) {
             model.addAttribute("error", "You are not the author of this recipe");
             model.addAttribute("recipe", recipe);
-            model.addAttribute("title", "Edit Recipe: " +
-                    recipe.getName());
+            model.addAttribute("title", "Edit Recipe: " + recipe.getName());
             model.addAttribute("recipeId", recipeId);
             return "edit";
         } else if (errors.hasErrors()) {
             model.addAttribute("recipe", newRecipe);
-            model.addAttribute("title", "Edit Recipe: " +
-                    recipe.getName());
+            model.addAttribute("title", "Edit Recipe: " + recipe.getName());
             model.addAttribute("recipeId", recipeId);
             return "edit";
         }
@@ -97,7 +96,6 @@ public class RecipeController extends AbstractController {
         recipe.setCalorie(newRecipe.getCalorie());
         recipe.setImageUrl(newRecipe.getImageUrl());
         recipeDao.save(recipe);
-        model.addAttribute("sessionOn", isSessionActive(request.getSession()));
         return "redirect:/recipe/?id=" + recipe.getId();
     }
 }

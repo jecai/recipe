@@ -62,7 +62,7 @@ public class AuthenticationController extends AbstractController {
             User newUser = new User(registerForm.getUsername(), registerForm.getPassword());
             userDao.save(newUser);
             setUserInSession(request.getSession(), newUser);
-            return "redirect:/menu";
+            return "redirect:/home";
         } else {
             verifyError = "Please enter a matching Password";
             model.addAttribute("title", "Register");
@@ -98,7 +98,7 @@ public class AuthenticationController extends AbstractController {
         }
 
         setUserInSession(request.getSession(), user);
-        return "redirect:/menu";
+        return "redirect:/home";
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)

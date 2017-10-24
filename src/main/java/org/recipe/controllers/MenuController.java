@@ -49,11 +49,11 @@ public class MenuController extends AbstractController {
     public String processMenuForm(Model model, @ModelAttribute @Valid
             Menu menu, Errors errors, HttpServletRequest request) {
 
+        model.addAttribute("sessionOn", isSessionActive(request.getSession()));
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Menu");
             return "menu/add";
         }
-        model.addAttribute("sessionOn", isSessionActive(request.getSession()));
         menuDao.save(menu);
 
         return "redirect:view/" + menu.getId();
@@ -85,8 +85,9 @@ public class MenuController extends AbstractController {
     @RequestMapping(value = "add-item", method = RequestMethod.POST)
     public String addItem(Model model,
                           @ModelAttribute @Valid MenuForm form,
-                          Errors errors) {
+                          Errors errors, HttpServletRequest request) {
 
+        model.addAttribute("sessionOn", isSessionActive(request.getSession()));
         if (errors.hasErrors()) {
             model.addAttribute("form", form);
             return "menu/add-item";
