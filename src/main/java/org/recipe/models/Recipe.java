@@ -95,4 +95,7 @@ public class Recipe {
         this.imageUrl = imageUrl;
     }
 
+    public void setIngredient(List<Ingredient> ingredient) {
+        this.ingredient = ingredient;
+    }
 }
