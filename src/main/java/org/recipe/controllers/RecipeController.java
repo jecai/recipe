@@ -1,5 +1,6 @@
 package org.recipe.controllers;
 
+import org.recipe.models.Ingredient;
 import org.recipe.models.Recipe;
 import org.recipe.models.data.IngredientDao;
 import org.recipe.models.data.RecipeDao;
@@ -10,6 +11,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequestMapping(value = "recipe")
@@ -33,9 +35,9 @@ public class RecipeController {
     @RequestMapping(value = "add", method = RequestMethod.GET)
     public String add(Model model, @PathVariable int ingredientId) {
 
-        Recipe recipe = recipeDao.findOne(Id);
-        IngredientForm form = new RecipeForm(
-                ingredientDao.findAll(), recipe);
+       Ingredient ingredient = ingredientDao.findOne(ingredientId);
+//        IngredientForm form = new RecipeForm(
+//                ingredientDao.findAll(), recipe);
         )
         model.addAttribute("title", "Add Recipe");
         model.addAttribute(new Recipe());
