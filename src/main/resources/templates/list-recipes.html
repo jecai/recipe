@@ -19,7 +19,7 @@
 
             <h3 th:text="${recipes.size() + ' Result(s)'}"></h3>
 
-            <div  th:each="recipe : ${recipes}">
+            <div th:each="recipe : ${recipes}">
                 <table  th:fragment="single-recipe" class="recipe-listing">
                     <tr>
                         <td><img class="recipe-detail-img" th:src="${recipe.imageUrl}" /></td>

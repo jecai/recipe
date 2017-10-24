@@ -4,7 +4,8 @@ public enum RecipeFieldType {
 
     ALL ("All"),
     NAME ("Name"),
-    INGREDIENT ("Ingredient");
+    INGREDIENT ("Ingredient"),
+    USERNAME ("Username");
 
     private final String name;
 

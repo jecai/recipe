@@ -65,6 +65,14 @@ public class ListController extends AbstractController {
 //
 //        return "list-recipes";
 //    }
+    @RequestMapping(value = "username")
+    public String listUser(Model model, HttpServletRequest request) {
+
+        model.addAttribute("title", "All Users");
+        model.addAttribute("users", userDao.findAll());
+        model.addAttribute("sessionOn", isSessionActive(request.getSession()));
+        return "list-users";
+    }
 
     @RequestMapping(value = "all")
     public String listAllJobs(Model model, HttpServletRequest request) {
