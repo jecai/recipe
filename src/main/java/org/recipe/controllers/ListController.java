@@ -30,41 +30,6 @@ public class ListController extends AbstractController {
         return "list";
     }
 
-//    @RequestMapping(value = "values")
-//    public String listColumnValues(Model model, @ModelAttribute SearchForm searchForm, @RequestParam RecipeFieldType column) {
-//
-//        if (column.equals(RecipeFieldType.ALL)) {
-//            return "redirect:/list/all";
-//        }
-//
-//
-//        ArrayList<? extends RecipeField> items;
-//        Iterable<Recipe> recipeList = recipeDao.findAll();
-//
-//        switch(column) {
-//            case INGREDIENT:
-//                items = recipeList.equals()
-//        }
-//
-//
-//        model.addAttribute("title", "All " + column.getName() + " Values");
-//        model.addAttribute("column", column);
-//        model.addAttribute("items", items);
-//
-//        return "list-column";
-//    }
-//
-//    @RequestMapping(value = "recipes")
-//    public String listJobsByColumnAndValue(Model model,
-//                                           @RequestParam RecipeFieldType column, @RequestParam String name) {
-//
-//        ArrayList<Recipe> recipes = recipeData.findByColumnAndValue(column, name);
-//
-//        model.addAttribute("title", "Recipes with " + column.getName() + ": " + name);
-//        model.addAttribute("recipes", recipes);
-//
-//        return "list-recipes";
-//    }
     @RequestMapping(value = "username")
     public String listUser(Model model, HttpServletRequest request) {
 
