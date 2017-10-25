@@ -39,17 +39,18 @@ public class SearchController extends AbstractController {
         Iterable<Recipe> recipeList = recipeDao.findAll();
         Iterable<User> userList = userDao.findAll();
         model.addAttribute("sessionOn", isSessionActive(request.getSession()));
+        String keyword = searchForm.getKeyword().toLowerCase();
 
         if (searchForm.getSearchField().equals(RecipeFieldType.ALL)) {
             for (Recipe recipe : recipeList) {
-                if ((recipe.getName() + recipe.getIngredient()).toLowerCase().contains(searchForm.getKeyword())) {
+                if ((recipe.getName() + recipe.getIngredient()).toLowerCase().contains(keyword)) {
                     recipes.add(recipe);
                 }
             }
             model.addAttribute("recipes", recipes);
         } else if (searchForm.getSearchField().equals(RecipeFieldType.INGREDIENT)) {
             for (Recipe recipe : recipeList) {
-                if (recipe.getIngredient().toLowerCase().contains(searchForm.getKeyword())) {
+                if (recipe.getIngredient().toLowerCase().contains(keyword)) {
                     recipes.add(recipe);
                 }
             }
@@ -57,7 +58,7 @@ public class SearchController extends AbstractController {
 
         } else if (searchForm.getSearchField().equals(RecipeFieldType.NAME)) {
             for (Recipe recipe : recipeList) {
-                if (recipe.getName().toLowerCase().contains(searchForm.getKeyword())) {
+                if (recipe.getName().toLowerCase().contains(keyword)) {
                     recipes.add(recipe);
 
                 }
@@ -65,7 +66,7 @@ public class SearchController extends AbstractController {
             model.addAttribute("recipes", recipes);
         } else if (searchForm.getSearchField().equals(RecipeFieldType.USERNAME)) {
             for (User user : userList) {
-                if (user.getUsername().toLowerCase().contains(searchForm.getKeyword())) {
+                if (user.getUsername().toLowerCase().contains(keyword)) {
                     users.add(user);
                 }
             }
