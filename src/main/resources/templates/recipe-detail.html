@@ -12,10 +12,6 @@
     <table th:replace="list-recipes :: single-recipe">
     </table>
 
-    <br/>
-    <a th:href="@{/recipe/edit/} + ${recipe.id}" >
-        <button th:if="${isAuthor}" class="center-block">Edit Recipe</button>
-    </a>
 </div>
 
 </body>

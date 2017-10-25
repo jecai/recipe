@@ -25,7 +25,11 @@
                         <td><img class="recipe-detail-img" th:src="${recipe.imageUrl}" /></td>
                         <td>
                             <p class="recipe-title" th:text="${#strings.capitalizeWords(recipe.name)}" />
-                            <p th:text="'By: '+ ${recipe.author.username}" />
+                            <span>By: </span><a th:text="${recipe.author.username}" th:href="@{/user?id=} + ${recipe.author.id}"></a>
+                            <br />
+                            <a th:if="${isAuthor}" th:href="@{/recipe/edit/} + ${recipe.id}" >
+                                <button>Edit Recipe</button>
+                            </a>
                         </td>
                     </tr>
                     <tr>
