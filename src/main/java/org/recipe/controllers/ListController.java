@@ -40,7 +40,7 @@ public class ListController extends AbstractController {
     }
 
     @RequestMapping(value = "all")
-    public String listAllJobs(Model model, HttpServletRequest request) {
+    public String listAllRecipes(Model model, HttpServletRequest request) {
 
         model.addAttribute("title", "All Recipes");
         model.addAttribute("recipes", recipeDao.findAll());
