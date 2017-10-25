@@ -1,12 +1,10 @@
 package org.recipe.controllers;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.recipe.models.User;
 import org.recipe.models.data.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.ModelAttribute;
+
+import javax.servlet.http.HttpSession;
 
 /**
  * Created by LaunchCode

@@ -1,19 +1,13 @@
 package org.recipe.controllers;
 
-import org.recipe.models.Recipe;
-import org.recipe.models.RecipeField;
 import org.recipe.models.RecipeFieldType;
 import org.recipe.models.data.RecipeDao;
-import org.recipe.models.forms.SearchForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 
 @Controller
 @RequestMapping(value = "list")
