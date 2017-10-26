@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head">
+</head>
+<body>
+
+<div th:replace="fragments :: page-header"></div>
+
+<div class="container body-content">
+
+    <h1 th:text="${#strings.capitalizeWords(title)}"></h1>
+
+    <div th:unless="${users} and ${users.size()}">
+        <h2>No Results</h2>
+    </div>
+
+    <div th:fragment="users-list">
+        <div th:if="${users}">
+            <h3 th:text="${users.size() + ' Result(s)'}"></h3>
+            <ul>
+                <li th:each="user : ${users}">
+                    <a th:text="${user.username}" th:href="@{/user?id=} + ${user.id}"></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

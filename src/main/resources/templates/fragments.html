@@ -15,29 +15,29 @@
 
     <div th:fragment="page-header" class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
-            <div class="navbar-header">
-                <a th:href="@{/}" class="navbar-brand">Recipe Tracker</a>
-            </div>
-            <div class="navbar-header">
-                <a th:href="@{/search}" class="navbar-brand">Search</a>
-            </div>
-            <div class="navbar-header">
-                <a th:href="@{/list}" class="navbar-brand">List</a>
+            <div class="navbar-header"></div>
+            <div th:if="${sessionOn} == false" class="navbar-header">
+                <a th:href="@{/all}" class="navbar-brand">Recipe Tracker</a>
             </div>
             <div th:if="${sessionOn} == true" class="navbar-header">
-                <a th:href="@{/recipe/add}" class="navbar-brand">Add</a>
+                <a th:href="@{/home}" class="navbar-brand">Recipe Tracker</a>
             </div>
-            <div th:if="${sessionOn} == true" class="navbar-header">
-                <a th:href="@{/menu}" class="navbar-brand">Menus</a>
+
+            <div th:if="${sessionOn} == true" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a th:href="@{/all}" class="navbar-brand">All Recipes</a></li>
+                    <li><a th:href="@{/search}" class="navbar-brand">Search</a></li>
+                    <li><a th:href="@{/list}" class="navbar-brand">List</a></li>
+                    <li><a th:href="@{/recipe/add}" class="navbar-brand">Add</a></li>
+                    <li><a th:href="@{/menu}" class="navbar-brand">Menus</a></li>
+                    <li><a th:href="@{/logout}" class="navbar-brand">Logout</a></li>
+                </ul>
             </div>
             <div th:if="${sessionOn} == false" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li><a th:href="@{/login}">Login</a></li>
-                </ul>
-            </div>
-            <div th:if="${sessionOn} == true" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a th:href="@{/logout}">Logout</a></li>
+                    <li><a th:href="@{/search}" class="navbar-brand">Search</a></li>
+                    <li><a th:href="@{/list}" class="navbar-brand">List</a></li>
+                    <li><a th:href="@{/login}" class="navbar-brand">Login</a></li>
                 </ul>
             </div>
         </div>

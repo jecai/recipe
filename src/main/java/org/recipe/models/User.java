@@ -6,6 +6,7 @@ import javax.validation.constraints.Pattern;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 @Table(name = "user")
@@ -22,6 +23,10 @@ public class User {
     @NotNull
     private String pwHash;
     private static final BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+    @OneToMany
+    @JoinColumn(name = "author_id")
+    private List<Recipe> recipes;
 
     public User() {}
 
@@ -66,5 +71,13 @@ public class User {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public List<Recipe> getRecipes() {
+        return recipes;
+    }
+
+    public void setRecipes(List<Recipe> recipes) {
+        this.recipes = recipes;
     }
 }

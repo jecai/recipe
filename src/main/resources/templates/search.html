@@ -30,8 +30,8 @@
 
     <hr />
 
-    <div th:replace="list-recipes :: recipes-list"></div>
-
+    <div th:if="${recipes}" th:replace="list-recipes :: recipes-list"></div>
+    <div th:unless="${users}" th:replace="list-users :: users-list"></div>
 </div>
 
 </body>

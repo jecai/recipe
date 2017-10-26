@@ -6,35 +6,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 
-
 @Controller
-public class HomeController extends AbstractController {
+@RequestMapping(value = "user")
+public class UserController extends AbstractController {
 
     @Autowired
     private RecipeDao recipeDao;
 
-    @RequestMapping(value = "/all")
-    public String index(Model model, HttpServletRequest request) {
-
-        model.addAttribute("title", "All Recipes");
-        model.addAttribute("recipes", recipeDao.findAll());
-        model.addAttribute("sessionOn", isSessionActive(request.getSession()));
-
-        return "index";
-    }
-
-    @RequestMapping(value = "/home")
-    public String userIndex(Model model, HttpServletRequest request) {
-        User user = getUserFromSession(request.getSession());
+    @RequestMapping(value = "", method = RequestMethod.GET)
+    public String userPage(Model model,  int id, HttpServletRequest request) {
+        User user = userDao.findOne(id);
         model.addAttribute("title", user.getUsername() + "'s Recipes");
         model.addAttribute("recipes", recipeDao.findByAuthor(user));
         model.addAttribute("sessionOn", isSessionActive(request.getSession()));
-
-        return "index";
+        model.addAttribute("isAuthor",
+                getUserFromSession(request.getSession()) == user);
+        return "list-recipes";
     }
 
-    // TODO own recipe
 }

@@ -9,8 +9,8 @@
     <div class="container body-content">
         <h1 th:text="${#strings.capitalizeWords(title)}"></h1>
         <h2>View All</h2>
-        <ul>
-            <li th:each="field : ${fields}">
+        <ul th:each="field : ${fields}">
+            <li th:if="${field.name == 'All' or field.name == 'Username'}">
                 <a th:href="@{/list/} + ${#strings.toLowerCase(field.name)}" th:text="${field.name}"></a>
             </li>
         </ul>

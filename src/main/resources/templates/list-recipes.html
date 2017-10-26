@@ -19,11 +19,18 @@
 
             <h3 th:text="${recipes.size() + ' Result(s)'}"></h3>
 
-            <div  th:each="recipe : ${recipes}">
+            <div th:each="recipe : ${recipes}">
                 <table  th:fragment="single-recipe" class="recipe-listing">
                     <tr>
-                        <td><img class="recipe-detail-img" th:src="${recipe.imageUrl}"></img></td>
-                        <td class="recipe-title" th:text="${#strings.capitalizeWords(recipe.name)}"></td>
+                        <td><img class="recipe-detail-img" th:src="${recipe.imageUrl}" /></td>
+                        <td>
+                            <p class="recipe-title" th:text="${#strings.capitalizeWords(recipe.name)}" />
+                            <span>By: </span><a th:text="${recipe.author.username}" th:href="@{/user?id=} + ${recipe.author.id}"></a>
+                            <br />
+                            <a th:if="${isAuthor}" th:href="@{/recipe/edit/} + ${recipe.id}" >
+                                <button>Edit Recipe</button>
+                            </a>
+                        </td>
                     </tr>
                     <tr>
                         <th>Servings</th>

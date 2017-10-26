@@ -13,6 +13,8 @@
         <span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span>
     </h1>
 
+    <p class="error" th:text="${error}"></p>
+
     <form method="post" style="max-width:600px;" th:object="${recipe}" action="/recipe/edit">
         <div class="form-group">
             <label th:for="name">Name</label>
@@ -20,8 +22,8 @@
             <span th:errors="*{name}" class="error"></span>
         </div>
         <div class="form-group">
-            <label th:for="ingredient">Ingredients</label>
-            <input class="form-control" th:field="*{ingredient}" />
+            <label th:for="ingredient">Ingredients - separate with ; (semicolon)</label>
+            <textarea class="form-control" height="50" rows="5" th:field="*{ingredient}" />
             <span th:errors="*{ingredient}" class="error"></span>
         </div>
 

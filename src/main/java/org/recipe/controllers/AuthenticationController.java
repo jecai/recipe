@@ -1,9 +1,5 @@
 package org.recipe.controllers;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
-
 import org.recipe.models.User;
 import org.recipe.models.data.UserDao;
 import org.recipe.models.forms.LoginForm;
@@ -15,6 +11,9 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 /**
  * Created by LaunchCode
@@ -30,7 +29,7 @@ public class AuthenticationController extends AbstractController {
         model.addAttribute("sessionOn", isSessionActive(request.getSession()));
         model.addAttribute("title", "Register");
         model.addAttribute("registerForm", new RegisterForm());
-        return "register";
+        return "user/register";
     }
 
     @RequestMapping(value = "login", method = RequestMethod.GET)
@@ -38,7 +37,7 @@ public class AuthenticationController extends AbstractController {
         model.addAttribute("sessionOn", isSessionActive(request.getSession()));
         model.addAttribute("title", "Login");
         model.addAttribute("loginForm", new LoginForm());
-        return "login";
+        return "user/login";
     }
 
     @RequestMapping(value = "register", method = RequestMethod.POST)
@@ -46,7 +45,7 @@ public class AuthenticationController extends AbstractController {
         if (errors.hasErrors()) {
             model.addAttribute("title", "Register");
             model.addAttribute("sessionOn", isSessionActive(request.getSession()));
-            return "register";
+            return "user/register";
         }
 
         User existUser = userDao.findByUsername(registerForm.getUsername());
@@ -55,20 +54,20 @@ public class AuthenticationController extends AbstractController {
             model.addAttribute("existingUsername", "Username already exists");
             model.addAttribute("title", "Register");
             model.addAttribute("sessionOn", isSessionActive(request.getSession()));
-            return "register";
+            return "user/register";
         }
         String verifyError = "";
         if (registerForm.getVerifyPassword().equals(registerForm.getPassword())) {
             User newUser = new User(registerForm.getUsername(), registerForm.getPassword());
             userDao.save(newUser);
             setUserInSession(request.getSession(), newUser);
-            return "redirect:/menu";
+            return "redirect:/home";
         } else {
             verifyError = "Please enter a matching Password";
             model.addAttribute("title", "Register");
             model.addAttribute("verifyError", verifyError);
             model.addAttribute("sessionOn", isSessionActive(request.getSession()));
-            return "register";
+            return "user/register";
         }
     }
 
@@ -77,7 +76,7 @@ public class AuthenticationController extends AbstractController {
         if (errors.hasErrors()) {
             model.addAttribute("title", "Login");
             model.addAttribute("sessionOn", isSessionActive(request.getSession()));
-            return "login";
+            return "user/login";
         }
 
         User user = userDao.findByUsername(loginForm.getUsername());
@@ -87,18 +86,18 @@ public class AuthenticationController extends AbstractController {
             model.addAttribute("usernameError", "Invalid username! Please try again!");
             model.addAttribute("sessionOn", isSessionActive(request.getSession()));
             model.addAttribute("title", "Login");
-            return "login";
+            return "user/login";
         }
 
         if (!user.isMatchingPassword(password)) {
             model.addAttribute("passwordError", "Wrong password! Please try again!");
             model.addAttribute("sessionOn", isSessionActive(request.getSession()));
             model.addAttribute("title", "Login");
-            return "login";
+            return "user/login";
         }
 
         setUserInSession(request.getSession(), user);
-        return "redirect:/menu";
+        return "redirect:/home";
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)

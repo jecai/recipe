@@ -3,6 +3,7 @@ package org.recipe.controllers;
 
 import org.recipe.models.Recipe;
 import org.recipe.models.RecipeFieldType;
+import org.recipe.models.User;
 import org.recipe.models.data.RecipeDao;
 import org.recipe.models.forms.SearchForm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,29 +35,43 @@ public class SearchController extends AbstractController {
                          @ModelAttribute SearchForm searchForm, HttpServletRequest request) {
 
         ArrayList<Recipe> recipes = new ArrayList<>();
+        ArrayList<User> users = new ArrayList<>();
         Iterable<Recipe> recipeList = recipeDao.findAll();
+        Iterable<User> userList = userDao.findAll();
         model.addAttribute("sessionOn", isSessionActive(request.getSession()));
+        String keyword = searchForm.getKeyword().toLowerCase();
 
         if (searchForm.getSearchField().equals(RecipeFieldType.ALL)) {
             for (Recipe recipe : recipeList) {
-                if ((recipe.getName() + recipe.getIngredient()).toLowerCase().contains(searchForm.getKeyword())) {
+                if ((recipe.getName() + recipe.getIngredient()).toLowerCase().contains(keyword)) {
                     recipes.add(recipe);
                 }
             }
+            model.addAttribute("recipes", recipes);
         } else if (searchForm.getSearchField().equals(RecipeFieldType.INGREDIENT)) {
             for (Recipe recipe : recipeList) {
-                if (recipe.getIngredient().toLowerCase().contains(searchForm.getKeyword())) {
+                if (recipe.getIngredient().toLowerCase().contains(keyword)) {
                     recipes.add(recipe);
                 }
             }
+            model.addAttribute("recipes", recipes);
+
         } else if (searchForm.getSearchField().equals(RecipeFieldType.NAME)) {
             for (Recipe recipe : recipeList) {
-                if (recipe.getName().toLowerCase().contains(searchForm.getKeyword())) {
+                if (recipe.getName().toLowerCase().contains(keyword)) {
                     recipes.add(recipe);
+
                 }
             }
+            model.addAttribute("recipes", recipes);
+        } else if (searchForm.getSearchField().equals(RecipeFieldType.USERNAME)) {
+            for (User user : userList) {
+                if (user.getUsername().toLowerCase().contains(keyword)) {
+                    users.add(user);
+                }
+            }
+            model.addAttribute("users", users);
         }
-        model.addAttribute("recipes", recipes);
         return "search";
     }
 

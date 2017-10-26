@@ -1,19 +1,21 @@
 package org.recipe.controllers;
 
-import org.recipe.models.Recipe;
 import org.recipe.models.Menu;
-import org.recipe.models.data.RecipeDao;
+import org.recipe.models.Recipe;
 import org.recipe.models.data.MenuDao;
+import org.recipe.models.data.RecipeDao;
 import org.recipe.models.forms.MenuForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import java.util.List;
 
 @Controller
 @RequestMapping(value = "menu")
@@ -49,11 +51,11 @@ public class MenuController extends AbstractController {
     public String processMenuForm(Model model, @ModelAttribute @Valid
             Menu menu, Errors errors, HttpServletRequest request) {
 
+        model.addAttribute("sessionOn", isSessionActive(request.getSession()));
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Menu");
             return "menu/add";
         }
-        model.addAttribute("sessionOn", isSessionActive(request.getSession()));
         menuDao.save(menu);
 
         return "redirect:view/" + menu.getId();
@@ -85,8 +87,9 @@ public class MenuController extends AbstractController {
     @RequestMapping(value = "add-item", method = RequestMethod.POST)
     public String addItem(Model model,
                           @ModelAttribute @Valid MenuForm form,
-                          Errors errors) {
+                          Errors errors, HttpServletRequest request) {
 
+        model.addAttribute("sessionOn", isSessionActive(request.getSession()));
         if (errors.hasErrors()) {
             model.addAttribute("form", form);
             return "menu/add-item";
