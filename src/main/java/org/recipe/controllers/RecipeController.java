@@ -1,6 +1,7 @@
 package org.recipe.controllers;
 
 import org.recipe.models.Recipe;
+import org.recipe.models.User;
 import org.recipe.models.data.RecipeDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,10 +28,13 @@ public class RecipeController extends AbstractController {
 
         //get the Recipe with the given ID and pass it into the view
         Recipe recipe = recipeDao.findOne(id);
+        User user = getUserFromSession(request.getSession());
+
         model.addAttribute("recipe", recipe);
         model.addAttribute("isAuthor",
-                getUserFromSession(request.getSession()) == recipe.getAuthor());
+                user == recipe.getAuthor());
         model.addAttribute("sessionOn", isSessionActive(request.getSession()));
+        model.addAttribute("sessionUser", user);
         return "recipe-detail";
     }
 

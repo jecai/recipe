@@ -32,7 +32,8 @@ public class HomeController extends AbstractController {
         model.addAttribute("title", user.getUsername() + "'s Recipes");
         model.addAttribute("recipes", recipeDao.findByAuthor(user));
         model.addAttribute("sessionOn", isSessionActive(request.getSession()));
-
+        model.addAttribute("favorites", user.getFavorites());
+        model.addAttribute("faveTitle", "My Favorites");
         return "index";
     }
 
