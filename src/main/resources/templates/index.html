@@ -15,7 +15,7 @@
 
         <h1>RECIPE TRACKER</h1>
         <p>Make us your online cookbook! Whip, bake, and post your next meal for free.</p>
-        <p><a class="btn btn-primary btn-lg" th:href="@{/register}" role="button">Sign up for more recipes</a></p>
+        <p th:if="${sessionOn == false}"><a class="btn btn-primary btn-lg" th:href="@{/register}">Sign up for more recipes</a></p>
 
     </div>
     <!--   /container  -->
@@ -28,7 +28,7 @@
 
         <h1>
             <span th:text="${#strings.capitalizeWords(title)}"></span>
-            <span class="glyphicon glyphicon-cutlery" aria-hidden="true"></span>
+            <span class="glyphicon glyphicon-cutlery"></span>
         </h1>
 
         <div th:unless="${recipes} and ${recipes.size()}">
