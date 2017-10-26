@@ -15,6 +15,7 @@
 
     <div th:fragment="page-header" class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
+            <div class="navbar-header"></div>
             <div th:if="${sessionOn} == false" class="navbar-header">
                 <a th:href="@{/all}" class="navbar-brand">Recipe Tracker</a>
             </div>
