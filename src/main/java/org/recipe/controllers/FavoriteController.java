@@ -26,13 +26,4 @@ public class FavoriteController extends AbstractController{
         String referer = request.getHeader("Referer");
         return "redirect:"+ referer;
     }
-
-    @RequestMapping(value = "")
-    public String index(Model model, HttpServletRequest request){
-
-        model.addAttribute("title", "User Favorites");
-        model.addAttribute("users", userDao.findAll());
-        model.addAttribute("sessionOn", isSessionActive(request.getSession()));
-        return "list-users";
-    }
 }

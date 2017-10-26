@@ -25,12 +25,10 @@
 <div class="container">
     <div class="container body-content">
 
-        <a th:href="@{/user?id=} + ${session.user_id}">
-            <h1>
-                <span th:text="${#strings.capitalizeWords(title)}"></span>
-                <span class="glyphicon glyphicon-cutlery"></span>
-            </h1>
-        </a>
+        <h1>
+            <span th:text="${#strings.capitalizeWords(title)}"></span>
+            <span class="glyphicon glyphicon-cutlery"></span>
+        </h1>
 
         <div th:unless="${recipes} and ${recipes.size()}">
             <h2>No Recipes</h2>
@@ -60,7 +58,7 @@
         <br />
         <br />
 
-        <div th:if="${sessionOn} == true">
+        <div th:if="${sessionOn == true and favoritesOff != true}">
             <a th:href="@{/user?id=} + ${session.user_id}">
                 <h1>
                     <span th:text="${#strings.capitalizeWords(faveTitle)}"></span>

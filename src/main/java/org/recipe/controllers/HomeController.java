@@ -22,7 +22,7 @@ public class HomeController extends AbstractController {
         model.addAttribute("title", "All Recipes");
         model.addAttribute("recipes", recipeDao.findAll());
         model.addAttribute("sessionOn", isSessionActive(request.getSession()));
-
+        model.addAttribute("favoritesOff", true);
         return "index";
     }
 
