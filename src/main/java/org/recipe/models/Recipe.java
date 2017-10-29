@@ -39,6 +39,9 @@ public class Recipe {
     @ManyToOne
     private User author;
 
+    @ManyToMany(mappedBy = "favorites")
+    private List<User> favoritedBy;
+
     public Recipe(String name, String ingredient, int serving, int calorie, String imageUrl) {
         this.name = name;
         this.ingredient = ingredient;
@@ -103,5 +106,13 @@ public class Recipe {
 
     public void setAuthor(User author) {
         this.author = author;
+    }
+
+    public List<User> getFavoritedBy() {
+        return favoritedBy;
+    }
+
+    public void setFavoritedBy(List<User> favoritedBy) {
+        this.favoritedBy = favoritedBy;
     }
 }
