@@ -45,10 +45,6 @@ public class RecipeController extends AbstractController {
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String add(Model model, @ModelAttribute @Valid Recipe recipe, Errors errors, HttpServletRequest request) {
 
-        // TODO #6 - Validate the RecipeForm model, and if valid, create a
-        // new Recipe and add it to the recipeData data store. Then
-        // redirect to the job detail view for the new Recipe.
-
         model.addAttribute("sessionOn", isSessionActive(request.getSession()));
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Recipe");
