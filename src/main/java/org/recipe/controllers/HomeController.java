@@ -36,5 +36,15 @@ public class HomeController extends AbstractController {
         return "index";
     }
 
+    @RequestMapping(value = "/about")
+    public String aboutIndex (HttpServletRequest request){
+        return "about";
+    }
+
+    @RequestMapping(value = "/map")
+    public String mapIndex (HttpServletRequest request){
+        return "map";
+    }
     // TODO own recipe
+
 }
