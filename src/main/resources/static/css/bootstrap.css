@@ -4963,13 +4963,22 @@ a.badge:focus {
   display:table;
 }
 
-.bg-image {
+.all-image {
   background: url('https://article.images.consumerreports.org/prod/content/dam/cro/news_articles/health/CR-Health-Crop-Food-Child-10-16') no-repeat center center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
 }
+
+.about-image {
+  background: url('https://www.cheekyfoodevents.com/wp-content/uploads/2015/09/options.jpg') no-repeat center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
 
 .jumbotron .container {
   display:table-cell;vertical-align:middle;
