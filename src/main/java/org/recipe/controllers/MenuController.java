@@ -1,5 +1,6 @@
 package org.recipe.controllers;
 
+import com.sun.org.apache.regexp.internal.RE;
 import org.recipe.models.Menu;
 import org.recipe.models.Recipe;
 import org.recipe.models.data.MenuDao;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping(value = "menu")
@@ -75,15 +78,27 @@ public class MenuController extends AbstractController {
     public String addItem(Model model, @PathVariable int menuId, HttpServletRequest request) {
 
         Menu menu = menuDao.findOne(menuId);
-        MenuForm form = new MenuForm(
-                recipeDao.findAll(), menu);
-//        MenuForm removeForm = new MenuForm(
-//                recipes.menu, menu);
+
+        List<Recipe> addRecipes = new ArrayList<>();
+
+        for(Recipe recipe : recipeDao.findAll()) {
+            if(!menu.getRecipes().contains(recipe)) {
+                addRecipes.add(recipe);
+            }
+        }
+
+        MenuForm addForm = new MenuForm(
+                addRecipes, menu);
+
+        MenuForm removeForm = new MenuForm(
+                menu.getRecipes(), menu);
+
         model.addAttribute("sessionOn", isSessionActive(request.getSession()));
         model.addAttribute("title", "Edit recipes for: " + menu.getName());
         model.addAttribute("addItem", "Add Recipe");
         model.addAttribute("removeItem", "Remove Recipe");
-        model.addAttribute("form", form);
+        model.addAttribute("addForm", addForm);
+        model.addAttribute("removeForm", removeForm);
 
         return "menu/edit-item";
     }
